@@ -1,0 +1,344 @@
+{
+  "currentVersion": 10.81,
+  "cimVersion": "2.6.0",
+  "id": 0,
+  "name": "primary_ExportFeatures",
+  "type": "Feature Layer",
+  "parentLayer": null,
+  "defaultVisibility": true,
+  "minScale": 0,
+  "maxScale": 0,
+  "canScaleSymbols": false,
+  "geometryType": "esriGeometryPoint",
+  "description": "",
+  "copyrightText": "",
+  "editFieldsInfo": null,
+  "syncCanReturnChanges": true,
+  "relationships": [],
+  "isDataVersioned": false,
+  "isDataArchived": false,
+  "isDataBranchVersioned": false,
+  "isDataReplicaTracked": false,
+  "isCoGoEnabled": false,
+  "supportsRollbackOnFailureParameter": true,
+  "supportsStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportsValidateSQL": true,
+  "supportsCoordinatesQuantization": true,
+  "supportsCalculate": true,
+  "supportsASyncCalculate": true,
+  "advancedQueryCapabilities": {
+    "supportsReturningQueryExtent": true,
+    "supportsStatistics": true,
+    "supportsDistinct": true,
+    "supportsPagination": true,
+    "supportsOrderBy": true,
+    "supportsQueryWithDistance": true,
+    "supportsLod": true,
+    "supportsPaginationOnAggregatedQueries": true,
+    "supportsQueryWithResultType": true,
+    "supportsCountDistinct": true,
+    "supportsReturningGeometryCentroid": false,
+    "supportsHavingClause": true,
+    "supportsQueryWithLodSR": true,
+    "supportsTopFeaturesQuery": true,
+    "supportsOrderByOnlyOnLayerFields": false,
+    "supportsPercentileStatistics": true,
+    "supportsQueryAttachments": true,
+    "supportsQueryAttachmentsWithReturnUrl": true,
+    "supportsQueryWithDatumTransformation": true
+  },
+  "extent": {
+    "xmin": 16738308.98361896,
+    "ymin": -4038476.497980863,
+    "xmax": 16935728.442616396,
+    "ymax": -3753243.513446253,
+    "spatialReference": {
+      "wkid": 102100,
+      "latestWkid": 3857,
+      "xyTolerance": 0.001,
+      "zTolerance": 0.001,
+      "mTolerance": 0.001,
+      "falseX": -20037700,
+      "falseY": -30241100,
+      "xyUnits": 148923141.92838538,
+      "falseZ": -100000,
+      "zUnits": 10000,
+      "falseM": -100000,
+      "mUnits": 10000
+    }
+  },
+  "drawingInfo": {
+    "renderer": {
+      "type": "simple",
+      "symbol": {
+        "type": "esriSMS",
+        "style": "esriSMSCircle",
+        "color": [
+          176,
+          0,
+          94,
+          255
+        ],
+        "size": 4,
+        "angle": 0,
+        "xoffset": 0,
+        "yoffset": 0,
+        "outline": {
+          "color": [
+            0,
+            0,
+            0,
+            255
+          ],
+          "width": 1
+        }
+      }
+    },
+    "scaleSymbols": true,
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "hasM": false,
+  "hasZ": false,
+  "allowTrueCurvesUpdates": false,
+  "onlyAllowTrueCurveUpdatesByTrueCurveClients": true,
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "objectIdField": "objectid",
+  "globalIdField": null,
+  "displayField": "substation",
+  "typeIdField": "",
+  "fields": [
+    {
+      "name": "objectid",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null,
+      "nullable": false,
+      "defaultValue": null,
+      "modelName": "objectid",
+      "editable": false
+    },
+    {
+      "name": "substation",
+      "type": "esriFieldTypeString",
+      "alias": "Substation",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "length": 19,
+      "defaultValue": null,
+      "modelName": "substation"
+    },
+    {
+      "name": "year",
+      "type": "esriFieldTypeDouble",
+      "alias": "Year",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "defaultValue": null,
+      "modelName": "year"
+    },
+    {
+      "name": "start_date",
+      "type": "esriFieldTypeDate",
+      "alias": "start_date",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "length": 29,
+      "defaultValue": null,
+      "modelName": "start_date"
+    },
+    {
+      "name": "end_date",
+      "type": "esriFieldTypeDate",
+      "alias": "end_date",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "length": 29,
+      "defaultValue": null,
+      "modelName": "end_date"
+    },
+    {
+      "name": "voltage_level_primary",
+      "type": "esriFieldTypeDouble",
+      "alias": "Voltage_level_primary",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "defaultValue": null,
+      "modelName": "voltage_level_primary"
+    },
+    {
+      "name": "voltage_level_secondary",
+      "type": "esriFieldTypeDouble",
+      "alias": "Voltage_level_secondary",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "defaultValue": null,
+      "modelName": "voltage_level_secondary"
+    },
+    {
+      "name": "available_capacity__load__at_n_",
+      "type": "esriFieldTypeDouble",
+      "alias": "Available_Capacity__Load__at_N_1",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "defaultValue": null,
+      "modelName": "available_capacity__load__at_n_"
+    },
+    {
+      "name": "available_capacity__generation_",
+      "type": "esriFieldTypeDouble",
+      "alias": "Available_Capacity__Generation__at_N_1",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "defaultValue": null,
+      "modelName": "available_capacity__generation_"
+    },
+    {
+      "name": "owner",
+      "type": "esriFieldTypeString",
+      "alias": "Owner",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "owner"
+    },
+    {
+      "name": "extract_date",
+      "type": "esriFieldTypeString",
+      "alias": "Extract_date",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "extract_date"
+    },
+    {
+      "name": "dataset",
+      "type": "esriFieldTypeString",
+      "alias": "Dataset",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "dataset"
+    }
+  ],
+  "geometryField": {
+    "name": "shape",
+    "type": "esriFieldTypeGeometry",
+    "alias": "Shape",
+    "domain": null,
+    "editable": true,
+    "nullable": true,
+    "defaultValue": null,
+    "modelName": "shape"
+  },
+  "indexes": [
+    {
+      "name": "r11701_sde_rowid_uk",
+      "fields": "objectid",
+      "isAscending": true,
+      "isUnique": true,
+      "description": ""
+    },
+    {
+      "name": "a11260_ix1",
+      "fields": "shape",
+      "isAscending": true,
+      "isUnique": true,
+      "description": ""
+    }
+  ],
+  "dateFieldsTimeReference": {
+    "timeZone": "UTC",
+    "respectsDaylightSaving": false
+  },
+  "types": [],
+  "templates": [
+    {
+      "name": "primary_ExportFeatures",
+      "description": "",
+      "prototype": {
+        "attributes": {
+          "extract_date": null,
+          "dataset": null,
+          "substation": null,
+          "year": null,
+          "start_date": null,
+          "end_date": null,
+          "voltage_level_primary": null,
+          "voltage_level_secondary": null,
+          "available_capacity__load__at_n_": null,
+          "available_capacity__generation_": null,
+          "owner": null
+        }
+      },
+      "drawingTool": "esriFeatureEditToolPoint"
+    }
+  ],
+  "useStandardizedQueries": true,
+  "standardMaxRecordCount": 16000,
+  "tileMaxRecordCount": 4000,
+  "standardMaxRecordCountNoGeometry": 16000,
+  "maxRecordCountFactor": 1,
+  "supportedQueryFormats": "JSON, geoJSON, PBF",
+  "enableZDefaults": true,
+  "maxRecordCount": 2000,
+  "allowGeometryUpdates": true,
+  "capabilities": "Query",
+  "allowUpdateWithoutMValues": true,
+  "hasGeometryProperties": true,
+  "zDefault": 0,
+  "serviceItemId": "80dbe042b881417c94ea34e229ce920b",
+  "hasMetadata": true,
+  "timeInfo": {
+    "startTimeField": "start_date",
+    "endTimeField": "end_date",
+    "trackIdField": null,
+    "timeReference": {
+      "timeZone": "UTC",
+      "respectsDaylightSaving": false
+    },
+    "timeInterval": 0,
+    "timeIntervalUnits": null,
+    "exportOptions": {
+      "useTime": false,
+      "timeDataCumulative": false,
+      "timeOffset": 0,
+      "timeOffsetUnits": "esriTimeUnitsUnknown"
+    },
+    "hasLiveData": false,
+    "timeExtent": [
+      1735689600000,
+      2051136000000
+    ]
+  },
+  "advancedEditingCapabilities": {
+    "supportedSqlFormatsInCalculate": [
+      "standard"
+    ]
+  },
+  "supportsApplyEditsWithGlobalIds": false,
+  "supportsAppend": true,
+  "supportedAppendFormats": "shapefile,geojson,csv,featureCollection",
+  "supportsQuantizationEditMode": true,
+  "supportsAttachmentsByUploadId": true,
+  "supportsAsyncDelete": true,
+  "supportsFieldDescriptionProperty": true,
+  "supportsExceedsLimitStatistics": true,
+  "sqlParserVersion": "PG_10.8.1"
+}

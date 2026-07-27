@@ -1,0 +1,105 @@
+generated: '2026-07-27'
+method: derived
+source: |
+  arcgis/ausgrid-dtapr-2023-layer0.json
+  arcgis/ausgrid-uhc-layer0-primary.json
+  arcgis/ausgrid-uhc-layer1-secondary.json
+  Field names, types and record counts were read from the harvested layer metadata and
+  verified against live queries saved in examples/. Nothing here is inferred from a
+  spec, because no spec exists.
+scope: >-
+  The only field-level machine-readable model associated with Ausgrid. It describes
+  Ausgrid-owned network planning and hosting capacity data published as ArcGIS REST
+  layers on the NSW Government portal — not an Ausgrid API contract.
+entities:
+- name: NetworkAssetSegment
+  layer: Ausgrid_DTAPR_2023/FeatureServer/0
+  geometry: esriGeometryPolyline
+  record_count: 8696
+  description: >-
+    Ausgrid feeder and sub-transmission line segments as published with the 2023
+    Distribution and Transmission Annual Planning Report.
+  fields:
+  - {name: objectid, type: esriFieldTypeOID, role: identifier}
+  - {name: object, type: string, note: 'asset class, e.g. "Feeder"'}
+  - {name: name, type: string, note: 'asset name, e.g. "72F"'}
+  - {name: voltage, type: string, note: 'e.g. "33kV"'}
+  - {name: dual_function, type: string, note: Yes/No}
+  - {name: owner, type: string, note: constant "Ausgrid"}
+  - {name: extract_date, type: string, note: 'free text, e.g. "October 2023"'}
+  - {name: dataset, type: string, note: 'e.g. "DTAPR 2023"'}
+  - {name: SHAPE__Length, type: double, note: geometry length}
+- name: SubstationHostingCapacityPrimary
+  layer: Ausgrid_UHC_Data/FeatureServer/0
+  layer_name: primary_ExportFeatures
+  geometry: esriGeometryPoint
+  record_count: 2160
+  description: >-
+    Unallocated hosting capacity at the primary voltage level, per zone substation per
+    forecast year — how much load and how much generation the network can still absorb
+    at N-1.
+  fields:
+  - {name: objectid, type: esriFieldTypeOID, role: identifier}
+  - {name: substation, type: string, role: natural-key, note: 'e.g. "Aberdeen"'}
+  - {name: year, type: double, role: natural-key, note: forecast year}
+  - {name: start_date, type: date, note: epoch milliseconds}
+  - {name: end_date, type: date, note: epoch milliseconds}
+  - {name: voltage_level_primary, type: double, note: kV}
+  - {name: voltage_level_secondary, type: double, note: kV}
+  - {name: available_capacity__load__at_n_, type: double, alias: Available_Capacity__Load__at_N_1, note: MVA/MW}
+  - {name: available_capacity__generation_, type: double, alias: Available_Capacity__Generation__at_N_1}
+  - {name: owner, type: string, note: constant "Ausgrid"}
+  - {name: extract_date, type: string, note: 'string on this layer, e.g. "20240627"'}
+  - {name: dataset, type: string, note: '"Primary"'}
+- name: SubstationHostingCapacitySecondary
+  layer: Ausgrid_UHC_Data/FeatureServer/1
+  layer_name: secondary_ExportFeatures
+  geometry: esriGeometryPoint
+  record_count: 2120
+  description: >-
+    The same hosting capacity model at the secondary voltage level, additionally
+    carrying the N-1 nameplate capacity of the substation.
+  fields:
+  - {name: objectid, type: esriFieldTypeOID, role: identifier}
+  - {name: substation, type: string, role: natural-key}
+  - {name: year, type: double, role: natural-key}
+  - {name: start_date, type: date, note: epoch milliseconds}
+  - {name: end_date, type: date, note: epoch milliseconds}
+  - {name: voltage_level_primary, type: double}
+  - {name: voltage_level_secondary, type: double}
+  - {name: n_1_nameplate_capacity, type: double, alias: N_1_Nameplate_Capacity}
+  - {name: available_capacity__load__at_n_, type: double}
+  - {name: available_capacity__generation_, type: double}
+  - {name: owner, type: string, note: constant "Ausgrid"}
+  - {name: extract_date, type: date, note: 'epoch milliseconds on THIS layer — differs from layer 0'}
+  - {name: dataset, type: string, note: '"Secondary"'}
+relationships:
+- from: SubstationHostingCapacityPrimary
+  to: SubstationHostingCapacitySecondary
+  kind: has_one
+  via: substation + year
+  confidence: high
+  note: >-
+    Same substation names and forecast years across both layers (verified: "Aberdeen"
+    year 2025 appears in both). There is no foreign key field — the join is on the
+    natural key.
+- from: NetworkAssetSegment
+  to: SubstationHostingCapacityPrimary
+  kind: related
+  via: none
+  confidence: low
+  note: >-
+    Both describe the same physical network and both carry owner="Ausgrid", but the
+    DTAPR line layer exposes no substation reference field, so there is no reliable
+    programmatic join. Recorded as a known gap rather than an invented key.
+unmodelled_surfaces:
+- name: Zone substation interval demand (2005-2025)
+  detail: >-
+    ZIP-of-CSV bulk downloads, one CSV per zone substation, 15-minute interval demand
+    in MW for 180+ substations. No schema is published and the files were not
+    downloaded and parsed this round, so no field model is asserted here.
+- name: Customer interval meter data
+  detail: >-
+    Supplied per AEMO meter data provision procedures by email after an identity-checked
+    web-form request. No schema is published.
+render: null

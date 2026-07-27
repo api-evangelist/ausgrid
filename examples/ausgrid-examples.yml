@@ -1,0 +1,35 @@
+generated: '2026-07-27'
+method: searched
+source: live requests executed 2026-07-27; every file in this directory is a verbatim response body
+examples:
+- file: ausgrid-uhc-primary-query-response.json
+  title: Unallocated hosting capacity for one zone substation
+  request: >-
+    GET https://portal.data.nsw.gov.au/arcgis/rest/services/Hosted/Ausgrid_UHC_Data/FeatureServer/0/query
+    ?where=substation%3D%27Aberdeen%27&outFields=*&returnGeometry=false&resultRecordCount=3&f=json
+  status: 200
+  note: >-
+    Ausgrid-owned data on a NSW Government host. Shows the epoch-millisecond date
+    fields and the truncated capacity field names.
+- file: ausgrid-dtapr-feeder-query-response.json
+  title: 33kV feeder segments from the DTAPR 2023 layer
+  request: >-
+    GET https://portal.data.nsw.gov.au/arcgis/rest/services/Hosted/Ausgrid_DTAPR_2023/FeatureServer/0/query
+    ?where=voltage%3D%2733kV%27&outFields=object,name,voltage,owner,extract_date,dataset
+    &returnGeometry=false&resultRecordCount=3&f=json
+  status: 200
+- file: ausgrid-arcgis-error-invalid-field-response.json
+  title: Error envelope for an unknown field
+  request: >-
+    GET .../Ausgrid_UHC_Data/FeatureServer/0/query?where=nosuchfield%3D1&outFields=*&f=json
+  status: 200
+  note: HTTP 200 carrying an error object — see errors/ausgrid-problem-types.yml.
+- file: ausgrid-outage-map-stats-response.json
+  title: Live outage counters from Ausgrid's own undocumented outage-map route
+  request: GET https://www.ausgrid.com.au/api/outages-map/outages/stats
+  status: 200
+  note: >-
+    FIRST-PARTY but UNDOCUMENTED. This is an internal Next.js route handler powering
+    ausgrid.com.au's outage map. It is anonymously reachable and returns JSON, but it
+    is unversioned, carries no published terms and is not offered to developers. Saved
+    as evidence of the surface, NOT as an Ausgrid API. Do not build against it.

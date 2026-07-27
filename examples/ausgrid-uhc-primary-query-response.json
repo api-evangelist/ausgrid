@@ -1,0 +1,149 @@
+{
+  "exceededTransferLimit": true,
+  "features": [
+    {
+      "attributes": {
+        "objectid": 1,
+        "substation": "Aberdeen",
+        "year": 2025.0,
+        "start_date": 1735689600000,
+        "end_date": 1767139200000,
+        "voltage_level_primary": 66.0,
+        "voltage_level_secondary": 11.0,
+        "available_capacity__load__at_n_": 13.69375,
+        "available_capacity__generation_": 62.44375,
+        "owner": "Ausgrid",
+        "extract_date": "20240627",
+        "dataset": "Primary"
+      }
+    },
+    {
+      "attributes": {
+        "objectid": 2,
+        "substation": "Aberdeen",
+        "year": 2026.0,
+        "start_date": 1767225600000,
+        "end_date": 1798675200000,
+        "voltage_level_primary": 66.0,
+        "voltage_level_secondary": 11.0,
+        "available_capacity__load__at_n_": 14.475,
+        "available_capacity__generation_": 62.44375,
+        "owner": "Ausgrid",
+        "extract_date": "20240627",
+        "dataset": "Primary"
+      }
+    },
+    {
+      "attributes": {
+        "objectid": 3,
+        "substation": "Aberdeen",
+        "year": 2027.0,
+        "start_date": 1798761600000,
+        "end_date": 1830211200000,
+        "voltage_level_primary": 66.0,
+        "voltage_level_secondary": 11.0,
+        "available_capacity__load__at_n_": 14.31875,
+        "available_capacity__generation_": 62.44375,
+        "owner": "Ausgrid",
+        "extract_date": "20240627",
+        "dataset": "Primary"
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "objectid",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "defaultValue": null,
+      "modelName": "objectid"
+    },
+    {
+      "name": "substation",
+      "type": "esriFieldTypeString",
+      "alias": "Substation",
+      "length": 19,
+      "defaultValue": null,
+      "modelName": "substation"
+    },
+    {
+      "name": "year",
+      "type": "esriFieldTypeDouble",
+      "alias": "Year",
+      "defaultValue": null,
+      "modelName": "year"
+    },
+    {
+      "name": "start_date",
+      "type": "esriFieldTypeDate",
+      "alias": "start_date",
+      "length": 29,
+      "defaultValue": null,
+      "modelName": "start_date"
+    },
+    {
+      "name": "end_date",
+      "type": "esriFieldTypeDate",
+      "alias": "end_date",
+      "length": 29,
+      "defaultValue": null,
+      "modelName": "end_date"
+    },
+    {
+      "name": "voltage_level_primary",
+      "type": "esriFieldTypeDouble",
+      "alias": "Voltage_level_primary",
+      "defaultValue": null,
+      "modelName": "voltage_level_primary"
+    },
+    {
+      "name": "voltage_level_secondary",
+      "type": "esriFieldTypeDouble",
+      "alias": "Voltage_level_secondary",
+      "defaultValue": null,
+      "modelName": "voltage_level_secondary"
+    },
+    {
+      "name": "available_capacity__load__at_n_",
+      "type": "esriFieldTypeDouble",
+      "alias": "Available_Capacity__Load__at_N_1",
+      "defaultValue": null,
+      "modelName": "available_capacity__load__at_n_"
+    },
+    {
+      "name": "available_capacity__generation_",
+      "type": "esriFieldTypeDouble",
+      "alias": "Available_Capacity__Generation__at_N_1",
+      "defaultValue": null,
+      "modelName": "available_capacity__generation_"
+    },
+    {
+      "name": "owner",
+      "type": "esriFieldTypeString",
+      "alias": "Owner",
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "owner"
+    },
+    {
+      "name": "extract_date",
+      "type": "esriFieldTypeString",
+      "alias": "Extract_date",
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "extract_date"
+    },
+    {
+      "name": "dataset",
+      "type": "esriFieldTypeString",
+      "alias": "Dataset",
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "dataset"
+    }
+  ],
+  "geometryType": "esriGeometryPoint",
+  "objectIdFieldName": "objectid",
+  "hasZ": false,
+  "hasM": false
+}

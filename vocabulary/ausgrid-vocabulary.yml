@@ -1,0 +1,87 @@
+generated: '2026-07-27'
+method: derived
+source: |
+  Terms taken from Ausgrid's own published pages and from the field names in the
+  harvested ArcGIS layer schemas (arcgis/). Definitions are grounded in Australian
+  National Electricity Market usage; no term is invented and none is asserted to be an
+  Ausgrid-published glossary — Ausgrid publishes no vocabulary or data dictionary.
+terms:
+- term: NMI
+  expansion: National Metering Identifier
+  definition: >-
+    The 10-11 character identifier for a connection point in the National Electricity
+    Market. It is the key a customer must supply on Ausgrid's meter data request form,
+    alongside the account holder name and postcode.
+  source: https://www.ausgrid.com.au/your-energy-use/your-meter-and-supply/access-your-meter-data/how-do-i-find-my-nmi
+- term: DNSP
+  expansion: Distribution Network Service Provider
+  definition: >-
+    The regulated operator of the poles, wires and substations that deliver electricity
+    to end customers. Ausgrid is the DNSP for Sydney, the Central Coast and the Hunter.
+    A DNSP is not a retailer and does not sell energy.
+- term: Zone substation
+  definition: >-
+    A substation stepping sub-transmission voltage down to distribution voltage. Ausgrid
+    publishes 15-minute interval demand in MW for 180+ zone substations, one CSV per
+    substation per financial year.
+  source: https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets/distribution-zone-substation-data
+- term: Interval data
+  definition: >-
+    Time-series electricity demand or consumption recorded at fixed intervals. Ausgrid
+    publishes network interval demand at 15-minute resolution; customer interval meter
+    data is supplied on request for up to 2 years of history in AEST.
+- term: DTAPR
+  expansion: Distribution and Transmission Annual Planning Report
+  definition: >-
+    The annual network planning report a distributor must publish. Ausgrid's Rule 5.13A
+    reporting year runs May to May, and it commits to publishing 12 months of interval
+    data in .csv within 30 business days of the report.
+  source: https://www.ausgrid.com.au/about-us/regulation-and-compliance/network-planning/dtapr
+- term: UHC
+  expansion: Unallocated Hosting Capacity
+  definition: >-
+    The headroom remaining on the network for additional load or additional generation
+    at a given substation and voltage level in a given forecast year. Exposed as the
+    fields available_capacity__load__at_n_ and available_capacity__generation_ on the
+    Ausgrid_UHC_Data layers.
+  source: arcgis/ausgrid-uhc-layer0-primary.json
+- term: N-1
+  definition: >-
+    The contingency planning standard under which the network must still serve demand
+    with one element out of service. Ausgrid's hosting capacity figures are stated at
+    N-1, and the secondary layer additionally carries n_1_nameplate_capacity.
+- term: Feeder
+  definition: >-
+    A distribution circuit running from a substation into the network. Appears as the
+    "object" value on the DTAPR line layer, with a name (e.g. "72F") and a voltage
+    (e.g. "33kV").
+  source: arcgis/ausgrid-dtapr-2023-layer0.json
+- term: Dual function asset
+  definition: >-
+    An asset performing both transmission and distribution functions, flagged by the
+    dual_function field on the DTAPR line layer — a regulatory classification affecting
+    which pricing and planning rules apply.
+- term: CDR
+  expansion: Consumer Data Right
+  definition: >-
+    Australia's economy-wide data portability regime. Live in energy, but it designates
+    electricity retailers as data holders with AEMO as gateway; distributors such as
+    Ausgrid are not designated and Ausgrid does not appear in the public CDR energy
+    data-holder register.
+- term: MSATS
+  expansion: Market Settlement and Transfer Solution
+  definition: >-
+    AEMO's registry through which market participants exchange metering and connection
+    point data. Distributors supply data into MSATS; this is the upstream path by which
+    Ausgrid meter data reaches retailers, and it is not a public API.
+- term: DER
+  expansion: Distributed Energy Resources
+  definition: >-
+    Customer-side generation and storage — rooftop solar, batteries, EV chargers — whose
+    connection headroom is what the unallocated hosting capacity dataset describes.
+- term: Dynamic connection
+  definition: >-
+    A connection agreement under which export or import limits vary with network
+    conditions. Ausgrid markets "real-time signals" for large customers under this
+    heading but names no protocol and publishes no interface.
+  source: https://www.ausgrid.com.au/connections/dynamic-connections

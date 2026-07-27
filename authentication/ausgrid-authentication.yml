@@ -1,0 +1,76 @@
+generated: '2026-07-27'
+method: searched
+source: |
+  Live probes of every Ausgrid-operated host plus the ArcGIS REST endpoints that
+  carry Ausgrid-owned network data; Ausgrid's own meter-data access page.
+docs: https://www.ausgrid.com.au/your-energy-use/your-meter-and-supply/access-your-meter-data
+summary:
+  types: []
+  api_key_in: []
+  oauth2_flows: []
+  finding: |
+    Ausgrid operates no authenticated API, so there is no security scheme to derive.
+    There is no API key, no OAuth 2.0, no OpenID Connect, no mutual TLS and no bearer
+    token on any published surface. Every machine-readable surface associated with
+    Ausgrid is ANONYMOUS, and the one surface that is genuinely restricted — a
+    customer's own interval meter data — is gated by IDENTITY VERIFICATION on a web
+    form, not by a credential.
+schemes: []
+surfaces:
+- name: Zone substation interval demand bulk downloads
+  url: https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets/distribution-zone-substation-data
+  auth: none
+  detail: >-
+    Anonymous HTTPS GET. Download tiles resolve to opaque Sitecore Content Hub URLs
+    of the form https://aopt-p-001.sitecorecontenthub.cloud/api/public/content/<guid>
+    with no key, no signature, no expiry and no terms click-through.
+- name: Ausgrid DTAPR / Unallocated Hosting Capacity ArcGIS REST FeatureServers
+  url: https://portal.data.nsw.gov.au/arcgis/rest/services/Hosted
+  auth: none
+  detail: >-
+    Anonymous ArcGIS REST query. No token parameter is required and none is accepted
+    against these layers; capabilities are "Query" only. NOTE the host is operated by
+    the NSW Government (portal.data.nsw.gov.au), not by Ausgrid — the DATA is
+    Ausgrid's (every record carries owner="Ausgrid"), the ENDPOINT is not.
+- name: Ausgrid DTAPR data portal
+  url: https://dtapr.ausgrid.com.au/
+  auth: none
+  detail: >-
+    Anonymous Rosetta Analytics web application. Serves flat files from
+    ./ausgrid_data/ (e.g. Tech_Specification_Lines.csv, DTAPR System Limitation
+    Template FY25.xlsx) with no key and no API.
+- name: Ausgrid outage map internal JSON routes
+  url: https://www.ausgrid.com.au/api/outages-map/
+  auth: none
+  detail: >-
+    Undocumented Next.js route handlers behind ausgrid.com.au's own outage map.
+    Anonymously reachable, no key. Not offered to developers, no published terms —
+    recorded as an observation, never as an offered API.
+- name: Customer interval meter data
+  url: https://www.ausgrid.com.au/your-energy-use/your-meter-and-supply/access-your-meter-data
+  auth: identity-verification
+  detail: >-
+    Not a credential. The requester supplies the NMI from the bill, the account
+    holder's surname or company name, the postcode and a date range; a third party
+    must attach a signed consent form from the account holder. Fulfilment is 10
+    business days for a single NMI, up to 20 for multiple, by email. There is no
+    programmatic path and no OAuth-style consent flow.
+- name: Ausgrid Services customer sign-in
+  url: https://services.ausgrid.com.au/SignIn
+  auth: session
+  detail: Human login wall for account and connection work. No OIDC discovery document (404). Not a developer surface.
+- name: IDO connection-enquiry portal
+  url: https://idoportal.ausgrid.com.au/
+  auth: session
+  detail: >-
+    ASP.NET login wall for connection enquiries. Probes of /.well-known/openid-configuration
+    and /.well-known/oauth-authorization-server 302-redirect to a generic error page;
+    there is no discovery document.
+consumer_data_right:
+  designated_data_holder: false
+  detail: >-
+    Ausgrid is a distribution network service provider. The CDR (Energy Sector)
+    Designation 2020 places the data-holder obligation on electricity retailers, with
+    AEMO as gateway. Ausgrid does not appear among the 84 energy brands returned by
+    https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary, so no
+    CDR OAuth 2.0 / OIDC consent stack applies to it.

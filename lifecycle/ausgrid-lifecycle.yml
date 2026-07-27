@@ -1,0 +1,53 @@
+generated: '2026-07-27'
+method: searched
+source: |
+  https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets/distribution-zone-substation-data
+  https://www.ausgrid.com.au/about-us/regulation-and-compliance/network-planning/dtapr
+  plus harvested ArcGIS metadata in arcgis/ and live probes.
+applies_to: published data products (Ausgrid operates no API)
+versioning:
+  scheme: annual-dataset-vintage
+  current: FY2025 interval data file; DTAPR 2023 feature layer
+  detail: >-
+    There is no API and therefore no API version. Data vintage is the version:
+    zone substation interval demand ships one ZIP per financial year (2005 through
+    2025), and the ArcGIS layers carry the vintage in the service name
+    (Ausgrid_DTAPR_2023) and in per-record fields (dataset, extract_date —
+    "October 2023" on the DTAPR layer, "20240627" on the hosting capacity layer).
+release_cadence:
+  scheme: annual
+  rule: National Electricity Rules 5.13A
+  detail: >-
+    Ausgrid states it provides 12 months of interval data in .csv within 30 business
+    days of publishing its Distribution and Transmission Annual Planning Report, for a
+    Reporting Year (as defined in Rule 5.13A) running May to May. The FY2025 file is
+    marked updated 2025-12-09.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  detail: >-
+    No deprecation or sunset policy of any kind. The failure mode is visible and
+    unmanaged: Ausgrid restructured its website from /Industry/Our-Research/Data-to-share/
+    to /about-us/about-ausgrid/research-data-sets/ without redirects, so all three
+    resource links in the NSW Government CKAN catalogue now 404, and the long-cited
+    "Solar home electricity data" research dataset (300 gross-metered solar homes,
+    2010-2013) is no longer reachable at its published URL. Broken-by-restructure is
+    this provider's de facto deprecation policy.
+  broken_links:
+  - url: https://www.ausgrid.com.au/Industry/Our-Research/Data-to-share
+    status: 404
+  - url: https://www.ausgrid.com.au/Industry/Our-Research/Data-to-share/Solar-home-electricity-data
+    status: 404
+sla:
+  url: null
+  uptime_target: null
+  detail: >-
+    No API SLA. The only published service level on a data surface is human and slow:
+    consumer meter data requests are answered in 10 business days for a single NMI and
+    up to 20 business days for multiple NMIs.
+status_page: null
+status_page_detail: >-
+  Ausgrid publishes a live network OUTAGE map (https://www.ausgrid.com.au/outages) for
+  electricity supply. That is a physical-network status surface, not a service status
+  page for a developer platform, so no StatusPage pointer is emitted.
+deprecated_operations: []

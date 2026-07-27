@@ -325,6 +325,102 @@ sources:
     type: Documentation
     note: Dynamic Connection Agreement. Marketing only, no protocol named.
 
+enrichmentRound2:
+  date: '2026-07-27'
+  verdictUnchanged: |
+    Re-ran full contract discovery against every Ausgrid-operated host. The round-1
+    answer stands: Ausgrid publishes no OpenAPI, no GraphQL, no AsyncAPI, no MCP
+    server, no SDK, no CLI, no Postman collection and no /.well-known/ discovery
+    surface. apis[] stays empty.
+  newFindings:
+    - finding: Ausgrid operates a fourth host that round 1 never probed.
+      url: https://dtapr.ausgrid.com.au/
+      status: 200
+      detail: >-
+        The Ausgrid Distribution and Transmission Annual Planning Report data portal,
+        built by Rosetta Analytics ("Ausgrid APR PORTAL"). Feeder forecast data, 11kV
+        primary distribution feeder capacity and generation hosting capacity, rendered
+        client-side with jQuery/DataTables/Highcharts. It has no API: the only data
+        fetch in the page is $.ajax to the static file ./ausgrid_data/Tech_Specification_Lines.csv,
+        and it also links ./ausgrid_data/DTAPR System Limitation Template FY25.xlsx.
+        /openapi.json, /swagger.json, /api-docs, /llms.txt, /robots.txt and every
+        /.well-known/ path return 404 on this host.
+    - finding: >-
+        Ausgrid-owned network data IS available as an anonymous, queryable ArcGIS REST
+        API — but on a NSW Government host, not an Ausgrid one.
+      urls:
+        - https://portal.data.nsw.gov.au/arcgis/rest/services/Hosted/Ausgrid_DTAPR_2023/FeatureServer
+        - https://portal.data.nsw.gov.au/arcgis/rest/services/Hosted/Ausgrid_UHC_Data/FeatureServer
+      status: 200
+      detail: >-
+        Found by listing https://portal.data.nsw.gov.au/arcgis/rest/services/Hosted?f=json
+        (202 services) and filtering for Ausgrid. Two FeatureServers, ArcGIS 10.81,
+        capabilities Query, maxRecordCount 2000, JSON/geoJSON/PBF, pagination
+        supported. Ausgrid_DTAPR_2023 layer 0 holds 8,696 feeder/sub-transmission line
+        features; Ausgrid_UHC_Data holds 2,160 primary and 2,120 secondary unallocated
+        hosting capacity records. Every feature carries owner="Ausgrid" — verified by
+        query, not assumed. Service and layer metadata harvested verbatim to arcgis/;
+        live query and error responses to examples/.
+      attributionDiscipline: >-
+        Recorded as Data properties and Reference artifacts, NOT as apis[] entries —
+        same discipline round 1 applied to the NSW CKAN Action API. The endpoint is
+        operated by the NSW Government (part of the NSW Network Opportunities Map
+        program run by Spatial Services / DCCEEW); only the data is Ausgrid's. Ausgrid
+        itself still offers no API.
+    - finding: idoportal.ausgrid.com.au produces false discovery hits.
+      detail: >-
+        The ASP.NET portal answers unknown paths with 302 -> /Errors/generic.html,
+        which returns HTTP 200. A redirect-following probe reports "200" for
+        /.well-known/openid-configuration, /.well-known/oauth-authorization-server,
+        /.well-known/oauth-protected-resource, /.well-known/api-catalog and /api-docs.
+        All five were fetched: every body is the same generic error page. No discovery
+        document exists. Recorded in well-known/ausgrid-well-known.yml so no future
+        round re-chases it.
+    - finding: No first-party packages, no GitHub organisation.
+      detail: >-
+        npm search "ausgrid" -> 0 results; PyPI /pypi/ausgrid/json -> 404; RubyGems
+        search -> empty; api.github.com/orgs/ausgrid -> 404. The 25 GitHub repositories
+        matching "ausgrid" are all community work against the published datasets
+        (pierre-haessig/ausgrid-solar-data, drzax/ausgrid-outages,
+        andrewharvey/ausgrid-data2pgsql, troykelly/hassio-component-ausgrid).
+        Captured in packages/ausgrid-packages.yml; no SDKs pointer emitted.
+    - finding: The stale NSW CKAN links are still stale.
+      detail: >-
+        Re-queried package_search?fq=organization:ausgrid — still 3 datasets (past-outages,
+        distribution-zone-substation, electrcity-use), all cc-by, all metadata_modified
+        2021-12-22, and all three resource URLs still point at the retired
+        /Industry/Our-Research/Data-to-share/ paths that now 404.
+    - finding: Vulnerability disclosure program detail captured.
+      detail: >-
+        Web form only, anonymous or pseudonymous submission permitted, urgent line
+        13 13 65. No bug bounty, no rewards, no PGP key, no stated response SLA, no
+        explicit safe harbour, and no /.well-known/security.txt (404, re-verified).
+        Ausgrid employees and contractors are ineligible. Captured in
+        security/ausgrid-vulnerability-disclosure.yml.
+    - finding: Undocumented first-party routes still live.
+      detail: >-
+        https://www.ausgrid.com.au/api/healthz -> 200 and
+        https://www.ausgrid.com.au/api/outages-map/outages/stats -> 200 with live
+        counters. One response body saved to
+        examples/ausgrid-outage-map-stats-response.json as evidence of the surface.
+        Still not listed as an API.
+  artifactsAdded:
+    - arcgis/ (6 verbatim ArcGIS service + layer metadata documents)
+    - examples/ (4 verbatim responses + index)
+    - well-known/ausgrid-well-known.yml
+    - security/ausgrid-domain-security.yml
+    - security/ausgrid-vulnerability-disclosure.yml
+    - authentication/ausgrid-authentication.yml
+    - conventions/ausgrid-conventions.yml
+    - errors/ausgrid-problem-types.yml
+    - lifecycle/ausgrid-lifecycle.yml
+    - conformance/ausgrid-conformance.yml
+    - data-model/ausgrid-data-model.yml
+    - vocabulary/ausgrid-vocabulary.yml
+    - packages/ausgrid-packages.yml
+    - skills/ (2 skills + _index.yml)
+    - llms/ausgrid-llms.txt
+
 actions:
   apisYmlUpdated: true
   apisListed: 0

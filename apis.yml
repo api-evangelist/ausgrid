@@ -44,16 +44,60 @@ modified: '2026-07-27'
 specificationVersion: '0.19'
 apis: []
 common:
+- type: DomainSecurity
+  url: security/ausgrid-domain-security.yml
 - type: Website
   url: https://www.ausgrid.com.au/
 - type: About
   url: https://www.ausgrid.com.au/about-us
 - type: Blog
   url: https://www.ausgrid.com.au/about-us/newsroom
-- type: Privacy
-  url: https://www.ausgrid.com.au/Ausgrid-Privacy-Policy
-- type: VulnerabilityDisclosure
+- type: PrivacyPolicy
+  url: https://www.ausgrid.com.au/ausgrid-privacy-policy
+- type: TermsOfService
+  url: https://www.ausgrid.com.au/disclaimer
+- type: Support
+  url: https://www.ausgrid.com.au/outages-and-issues/customer-support
+- type: Security
   url: https://www.ausgrid.com.au/outages-and-issues/customer-support/ausgrid-vulnerability-disclosure-program
+- type: VulnerabilityDisclosure
+  url: security/ausgrid-vulnerability-disclosure.yml
+- type: WellKnown
+  url: well-known/ausgrid-well-known.yml
+- type: Authentication
+  url: authentication/ausgrid-authentication.yml
+- type: Conventions
+  url: conventions/ausgrid-conventions.yml
+- type: ErrorCatalog
+  url: errors/ausgrid-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/ausgrid-lifecycle.yml
+- type: Conformance
+  url: conformance/ausgrid-conformance.yml
+- type: Vocabulary
+  url: vocabulary/ausgrid-vocabulary.yml
+- type: DataModel
+  url: data-model/ausgrid-data-model.yml
+- type: Examples
+  url: examples/ausgrid-examples.yml
+- type: Packages
+  url: packages/ausgrid-packages.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/ausgrid-llms.txt
+- type: Reference
+  url: arcgis/ausgrid-dtapr-2023-featureserver.json
+- type: Reference
+  url: arcgis/ausgrid-dtapr-2023-layer0.json
+- type: Reference
+  url: arcgis/ausgrid-uhc-featureserver.json
+- type: Reference
+  url: arcgis/ausgrid-uhc-layer0-primary.json
+- type: Reference
+  url: arcgis/ausgrid-uhc-layer1-secondary.json
+- type: Reference
+  url: arcgis/ausgrid-arcgis-rest-info.json
 - type: LinkedIn
   url: https://www.linkedin.com/company/ausgrid/
 - type: Data
@@ -66,8 +110,16 @@ common:
   url: https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets/electricity-research
 - type: Data
   url: https://data.nsw.gov.au/data/organization/ausgrid
+- type: Data
+  url: https://dtapr.ausgrid.com.au/
+- type: Data
+  url: https://portal.data.nsw.gov.au/arcgis/rest/services/Hosted/Ausgrid_DTAPR_2023/FeatureServer
+- type: Data
+  url: https://portal.data.nsw.gov.au/arcgis/rest/services/Hosted/Ausgrid_UHC_Data/FeatureServer
 - type: Documentation
   url: https://www.ausgrid.com.au/your-energy-use/your-meter-and-supply/access-your-meter-data
+- type: Documentation
+  url: https://www.ausgrid.com.au/about-us/regulation-and-compliance/network-planning/dtapr
 - type: Portal
   url: https://services.ausgrid.com.au/SignIn
 - type: Portal

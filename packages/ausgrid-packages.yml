@@ -1,0 +1,50 @@
+generated: '2026-07-27'
+method: searched
+source: live registry and GitHub searches executed 2026-07-27
+packages: []
+finding: >-
+  Ausgrid publishes no first-party client library, SDK or CLI in any language, and has
+  no GitHub organisation. There is nothing to wrap — the company operates no API.
+registry_probes:
+- registry: npm
+  query: ausgrid
+  results: 0
+- registry: pypi
+  package: ausgrid
+  status: 404
+- registry: rubygems
+  query: ausgrid
+  results: 0
+- registry: github
+  query: 'orgs/ausgrid'
+  status: 404
+  note: No Ausgrid GitHub organisation exists.
+community_tooling:
+  note: >-
+    Third-party only. Listed for completeness — none is published by Ausgrid, none is
+    an SDK, and no SDKs pointer is emitted in apis.yml.
+  repositories:
+  - name: pierre-haessig/ausgrid-solar-data
+    url: https://github.com/pierre-haessig/ausgrid-solar-data
+    stars: 72
+    description: Personal analysis of the "Solar home electricity" dataset from Ausgrid.
+    official: false
+  - name: rockey-abhishek/Ausgrid-Dataset
+    url: https://github.com/rockey-abhishek/Ausgrid-Dataset
+    stars: 7
+    description: Cleaning and visualisation of Ausgrid solar generation/consumption data.
+    official: false
+  - name: drzax/ausgrid-outages
+    url: https://github.com/drzax/ausgrid-outages
+    stars: 3
+    description: Scrapes outage data from the Ausgrid website.
+    official: false
+  - name: andrewharvey/ausgrid-data2pgsql
+    url: https://github.com/andrewharvey/ausgrid-data2pgsql
+    stars: 2
+    description: Scripts to load Ausgrid open data into PostgreSQL.
+    official: false
+  - name: troykelly/hassio-component-ausgrid
+    url: https://github.com/troykelly/hassio-component-ausgrid
+    description: Home Assistant component tracking Ausgrid outages.
+    official: false

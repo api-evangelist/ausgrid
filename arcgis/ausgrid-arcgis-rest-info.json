@@ -1,0 +1,11 @@
+{
+  "currentVersion": 10.81,
+  "fullVersion": "10.8.1",
+  "soapUrl": "https://portal.data.nsw.gov.au/arcgis/services",
+  "secureSoapUrl": null,
+  "owningSystemUrl": "https://portal.data.nsw.gov.au/arcgis",
+  "authInfo": {
+    "isTokenBasedSecurity": true,
+    "tokenServicesUrl": "https://portal.data.nsw.gov.au/arcgis/sharing/rest/generateToken"
+  }
+}

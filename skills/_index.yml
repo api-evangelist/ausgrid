@@ -1,0 +1,20 @@
+generated: '2026-07-27'
+method: generated
+note: >-
+  Ausgrid publishes no OpenAPI, so these skills are grounded in verified live HTTP
+  request shapes (ArcGIS REST layers carrying Ausgrid data, and Ausgrid's own bulk data
+  pages) rather than in operationIds. Every URL, field name and record count referenced
+  was fetched on 2026-07-27 and is saved in arcgis/ and examples/.
+skills:
+- file: ausgrid-hosting-capacity-lookup.md
+  name: Look up Ausgrid unallocated hosting capacity for a zone substation
+  api: arcgis/ausgrid-uhc-featureserver.json
+  surface: https://portal.data.nsw.gov.au/arcgis/rest/services/Hosted/Ausgrid_UHC_Data/FeatureServer
+  operations:
+  - GET /Ausgrid_UHC_Data/FeatureServer/0/query
+  - GET /Ausgrid_UHC_Data/FeatureServer/1/query
+- file: ausgrid-zone-substation-demand-data.md
+  name: Get Ausgrid zone substation interval demand data
+  api: null
+  surface: https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets
+  operations: []

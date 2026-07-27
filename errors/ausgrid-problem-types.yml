@@ -1,0 +1,65 @@
+generated: '2026-07-27'
+method: derived
+source: |
+  Live error responses captured from the machine-readable surfaces carrying Ausgrid
+  data, plus probes of Ausgrid's own hosts. There is no Ausgrid OpenAPI to derive
+  4xx/5xx responses from and Ausgrid publishes no error reference.
+format: proprietary
+format_detail: >-
+  Not RFC 9457. The ArcGIS REST surface returns HTTP 200 with an error object in the
+  body: {"error":{"code":<int>,"message":<string>,"details":[]}}. Ausgrid's own website
+  returns HTML error pages, and idoportal.ausgrid.com.au 302-redirects unknown paths to
+  /Errors/generic.html.
+envelope:
+  path: $.error
+  fields:
+  - code
+  - message
+  - details
+problems:
+- surface: arcgis-featureserver
+  http_status: 200
+  body_code: 500
+  message: Field name [nosuchfield] does not exist.
+  meaning: The `where` clause or `outFields` referenced a field that is not on the layer.
+  remediation: >-
+    Read field names from the layer metadata (arcgis/ausgrid-uhc-layer0-primary.json,
+    arcgis/ausgrid-dtapr-2023-layer0.json). Names are lower-cased and truncated and do
+    not match the display aliases.
+  example: examples/ausgrid-arcgis-error-invalid-field-response.json
+  verified: '2026-07-27'
+- surface: arcgis-featureserver
+  http_status: 200
+  body_code: 500
+  message: null
+  meaning: >-
+    Layer index does not exist on the service (observed requesting
+    /Ausgrid_UHC_Data/FeatureServer/99). The message is null — the only signal is the
+    presence of the error object.
+  remediation: >-
+    Enumerate valid layer ids from the FeatureServer metadata first
+    (Ausgrid_DTAPR_2023 exposes layer 0; Ausgrid_UHC_Data exposes layers 0 and 1).
+  verified: '2026-07-27'
+- surface: ausgrid-website
+  http_status: 404
+  message: Page not found
+  meaning: >-
+    Next.js HTML 404. Returned for every /.well-known/ path, /llms.txt, /openapi.json,
+    /swagger.json and /api-docs, and for the retired /Industry/Our-Research/Data-to-share/
+    data paths still cited by the NSW CKAN catalogue.
+  remediation: Use the current /about-us/about-ausgrid/research-data-sets/ paths.
+  verified: '2026-07-27'
+- surface: idoportal
+  http_status: 302
+  redirect: /Errors/generic.html?aspxerrorpath=<requested-path>
+  message: Internal Server Error
+  meaning: >-
+    ASP.NET catch-all. Any unknown path redirects to a generic error page that itself
+    returns HTTP 200 — a trap for redirect-following discovery probes, which read it as
+    a successful /.well-known/ or /api-docs response.
+  remediation: Follow redirects and inspect the body before recording a discovery hit.
+  verified: '2026-07-27'
+notes: >-
+  No error-code registry, no problem-type URIs and no documented error semantics are
+  published by Ausgrid. Everything above is observed behaviour, recorded so an
+  integrator can code defensively.

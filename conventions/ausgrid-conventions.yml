@@ -1,0 +1,99 @@
+generated: '2026-07-27'
+method: derived
+source: |
+  Derived from live requests against every Ausgrid-associated machine-readable
+  surface (ArcGIS REST FeatureServer metadata + query responses harvested to
+  arcgis/ and examples/), plus Ausgrid's own published data and meter-data pages.
+scope: |
+  Ausgrid publishes no API of its own, so there is no Ausgrid request/response
+  contract to document. What follows are the conventions that actually govern the
+  machine-readable surfaces carrying Ausgrid data — they are ArcGIS REST platform
+  conventions on a NSW Government host, plus Ausgrid's own bulk-file conventions.
+  Recorded so an integrator knows what to expect; not presented as an Ausgrid design.
+authentication:
+  style: none
+  detail: Anonymous HTTPS GET everywhere. See authentication/ausgrid-authentication.yml.
+idempotency:
+  supported: false
+  detail: >-
+    No idempotency key, no idempotent-write contract, and nothing to be idempotent
+    about — every surface is read-only (ArcGIS capabilities are "Query"; bulk data is
+    a static file download).
+pagination:
+  style: arcgis-result-offset
+  applies_to: https://portal.data.nsw.gov.au/arcgis/rest/services/Hosted/Ausgrid_*/FeatureServer
+  params:
+  - resultOffset
+  - resultRecordCount
+  - returnCountOnly
+  max_record_count: 2000
+  standard_max_record_count: 16000
+  supports_pagination: true
+  detail: >-
+    Verified from the harvested layer metadata (arcgis/ausgrid-uhc-layer0-primary.json:
+    maxRecordCount 2000, standardMaxRecordCount 16000, advancedQueryCapabilities
+    .supportsPagination true). Layer 0 of Ausgrid_DTAPR_2023 holds 8,696 features and
+    must be paged.
+filtering:
+  params:
+  - where
+  - outFields
+  - returnGeometry
+  - geometry
+  - geometryType
+  - spatialRel
+  - orderByFields
+  - groupByFieldsForStatistics
+  - outStatistics
+  detail: >-
+    Standard ArcGIS REST query. SQL-92-style `where` over the layer's own field names
+    (e.g. where=substation='Aberdeen'). Field names are lower-cased and truncated
+    (available_capacity__load__at_n_, available_capacity__generation_) while the
+    display aliases are not — always read field names from the layer metadata.
+formats:
+  request: query string (GET) or form-encoded (POST)
+  response_formats:
+  - json
+  - geoJSON
+  - PBF
+  param: f
+  detail: >-
+    f=json is the default used throughout examples/. f=geojson returns GeoJSON.
+    Coordinates are Web Mercator (wkid 102100 / latestWkid 3857) unless outSR is set.
+    Date fields (start_date, end_date) are epoch MILLISECONDS, and extract_date is a
+    string on one layer ("October 2023", "20240627") and an epoch date on another —
+    do not assume a single date convention across layers.
+error_envelope:
+  shape: '{"error": {"code": <int>, "message": <string>, "details": []}}'
+  http_status_on_error: 200
+  detail: >-
+    ArcGIS returns HTTP 200 with an error object in the body. A bad field name yields
+    {"error":{"code":500,"message":"Field name [nosuchfield] does not exist.","details":[]}}
+    — captured verbatim in examples/ausgrid-arcgis-error-invalid-field-response.json.
+    Clients MUST inspect the body, not the status line. See errors/ausgrid-problem-types.yml.
+versioning:
+  scheme: dataset-in-name
+  detail: >-
+    There is no API version. The data vintage is baked into the service name
+    (Ausgrid_DTAPR_2023) and into every record (dataset, extract_date fields). The
+    ArcGIS platform reports currentVersion 10.81 — that is the server product
+    version, not a contract version.
+rate_limiting:
+  documented: false
+  headers: none observed
+  detail: No rate-limit policy or headers are published or observed on any surface.
+tracing:
+  request_id_header: none
+bulk_data:
+  detail: >-
+    Ausgrid's own open data is delivered as ZIP-of-CSV, one file per financial year,
+    from opaque Sitecore Content Hub URLs
+    (https://aopt-p-001.sitecorecontenthub.cloud/api/public/content/<guid>) with no
+    filename, no version and no content negotiation in the path. There is no index
+    file and no checksum; the human page is the only catalogue.
+cross_links:
+  authentication: authentication/ausgrid-authentication.yml
+  errors: errors/ausgrid-problem-types.yml
+  lifecycle: lifecycle/ausgrid-lifecycle.yml
+  data_model: data-model/ausgrid-data-model.yml
+  examples: examples/ausgrid-examples.yml

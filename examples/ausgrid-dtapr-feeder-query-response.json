@@ -1,0 +1,89 @@
+{
+  "exceededTransferLimit": true,
+  "features": [
+    {
+      "attributes": {
+        "object": "Feeder",
+        "name": "72F",
+        "voltage": "33kV",
+        "owner": "Ausgrid",
+        "extract_date": "October 2023",
+        "dataset": "DTAPR 2023"
+      }
+    },
+    {
+      "attributes": {
+        "object": "Feeder",
+        "name": "39H",
+        "voltage": "33kV",
+        "owner": "Ausgrid",
+        "extract_date": "October 2023",
+        "dataset": "DTAPR 2023"
+      }
+    },
+    {
+      "attributes": {
+        "object": "Feeder",
+        "name": "72F",
+        "voltage": "33kV",
+        "owner": "Ausgrid",
+        "extract_date": "October 2023",
+        "dataset": "DTAPR 2023"
+      }
+    }
+  ],
+  "fields": [
+    {
+      "name": "object",
+      "type": "esriFieldTypeString",
+      "alias": "Object",
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "object"
+    },
+    {
+      "name": "name",
+      "type": "esriFieldTypeString",
+      "alias": "Name",
+      "length": 20,
+      "defaultValue": null,
+      "modelName": "name"
+    },
+    {
+      "name": "voltage",
+      "type": "esriFieldTypeString",
+      "alias": "Voltage",
+      "length": 11,
+      "defaultValue": null,
+      "modelName": "voltage"
+    },
+    {
+      "name": "owner",
+      "type": "esriFieldTypeString",
+      "alias": "Owner",
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "owner"
+    },
+    {
+      "name": "extract_date",
+      "type": "esriFieldTypeString",
+      "alias": "Extract_date",
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "extract_date"
+    },
+    {
+      "name": "dataset",
+      "type": "esriFieldTypeString",
+      "alias": "Dataset",
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "dataset"
+    }
+  ],
+  "geometryType": "esriGeometryPolyline",
+  "objectIdFieldName": "objectid",
+  "hasZ": false,
+  "hasM": false
+}

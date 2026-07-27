@@ -1,0 +1,281 @@
+{
+  "currentVersion": 10.81,
+  "cimVersion": "2.6.0",
+  "id": 0,
+  "name": "Ausgrid_DTAPR_2023",
+  "type": "Feature Layer",
+  "parentLayer": null,
+  "defaultVisibility": true,
+  "minScale": 4622325,
+  "maxScale": 0,
+  "canScaleSymbols": false,
+  "geometryType": "esriGeometryPolyline",
+  "description": "",
+  "copyrightText": "",
+  "editFieldsInfo": null,
+  "syncCanReturnChanges": true,
+  "relationships": [],
+  "isDataVersioned": false,
+  "isDataArchived": false,
+  "isDataBranchVersioned": false,
+  "isDataReplicaTracked": false,
+  "isCoGoEnabled": false,
+  "supportsRollbackOnFailureParameter": true,
+  "supportsStatistics": true,
+  "supportsAdvancedQueries": true,
+  "supportsValidateSQL": true,
+  "supportsCoordinatesQuantization": true,
+  "supportsCalculate": true,
+  "supportsASyncCalculate": true,
+  "advancedQueryCapabilities": {
+    "supportsReturningQueryExtent": true,
+    "supportsStatistics": true,
+    "supportsDistinct": true,
+    "supportsPagination": true,
+    "supportsOrderBy": true,
+    "supportsQueryWithDistance": true,
+    "supportsLod": true,
+    "supportsPaginationOnAggregatedQueries": true,
+    "supportsQueryWithResultType": true,
+    "supportsCountDistinct": true,
+    "supportsReturningGeometryCentroid": false,
+    "supportsHavingClause": true,
+    "supportsQueryWithLodSR": true,
+    "supportsTopFeaturesQuery": true,
+    "supportsOrderByOnlyOnLayerFields": false,
+    "supportsPercentileStatistics": true,
+    "supportsQueryAttachments": true,
+    "supportsQueryAttachmentsWithReturnUrl": true,
+    "supportsQueryWithDatumTransformation": true
+  },
+  "extent": {
+    "xmin": 16738113.505145974,
+    "ymin": -4050293.033477828,
+    "xmax": 16935747.193048798,
+    "ymax": -3753228.9834785983,
+    "spatialReference": {
+      "wkid": 102100,
+      "latestWkid": 3857,
+      "xyTolerance": 0.001,
+      "zTolerance": 0.001,
+      "mTolerance": 0.001,
+      "falseX": -20037700,
+      "falseY": -30241100,
+      "xyUnits": 148923141.92838538,
+      "falseZ": -100000,
+      "zUnits": 10000,
+      "falseM": -100000,
+      "mUnits": 10000
+    }
+  },
+  "drawingInfo": {
+    "renderer": {
+      "type": "simple",
+      "symbol": {
+        "type": "esriSLS",
+        "style": "esriSLSSolid",
+        "color": [
+          28,
+          130,
+          0,
+          255
+        ],
+        "width": 1
+      }
+    },
+    "scaleSymbols": true,
+    "transparency": 0,
+    "labelingInfo": null
+  },
+  "hasM": false,
+  "hasZ": false,
+  "allowTrueCurvesUpdates": false,
+  "onlyAllowTrueCurveUpdatesByTrueCurveClients": true,
+  "hasAttachments": false,
+  "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+  "objectIdField": "objectid",
+  "globalIdField": null,
+  "displayField": "name",
+  "typeIdField": "",
+  "fields": [
+    {
+      "name": "object",
+      "type": "esriFieldTypeString",
+      "alias": "Object",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "object"
+    },
+    {
+      "name": "name",
+      "type": "esriFieldTypeString",
+      "alias": "Name",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "length": 20,
+      "defaultValue": null,
+      "modelName": "name"
+    },
+    {
+      "name": "voltage",
+      "type": "esriFieldTypeString",
+      "alias": "Voltage",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "length": 11,
+      "defaultValue": null,
+      "modelName": "voltage"
+    },
+    {
+      "name": "dual_function",
+      "type": "esriFieldTypeString",
+      "alias": "Dual_Function",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "dual_function"
+    },
+    {
+      "name": "owner",
+      "type": "esriFieldTypeString",
+      "alias": "Owner",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "owner"
+    },
+    {
+      "name": "extract_date",
+      "type": "esriFieldTypeString",
+      "alias": "Extract_date",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "extract_date"
+    },
+    {
+      "name": "dataset",
+      "type": "esriFieldTypeString",
+      "alias": "Dataset",
+      "domain": null,
+      "editable": true,
+      "nullable": true,
+      "length": 200,
+      "defaultValue": null,
+      "modelName": "dataset"
+    },
+    {
+      "name": "objectid",
+      "type": "esriFieldTypeOID",
+      "alias": "OBJECTID",
+      "domain": null,
+      "nullable": false,
+      "defaultValue": null,
+      "modelName": "objectid",
+      "editable": false
+    },
+    {
+      "type": "esriFieldTypeDouble",
+      "nullable": true,
+      "editable": false,
+      "domain": null,
+      "defaultValue": null,
+      "virtual": true,
+      "name": "SHAPE__Length",
+      "alias": "SHAPE__Length"
+    }
+  ],
+  "geometryField": {
+    "name": "shape",
+    "type": "esriFieldTypeGeometry",
+    "alias": "SHAPE",
+    "domain": null,
+    "editable": true,
+    "nullable": true,
+    "defaultValue": null,
+    "modelName": "shape"
+  },
+  "indexes": [
+    {
+      "name": "r11666_sde_rowid_uk",
+      "fields": "objectid",
+      "isAscending": true,
+      "isUnique": true,
+      "description": ""
+    },
+    {
+      "name": "a11226_ix1",
+      "fields": "shape",
+      "isAscending": true,
+      "isUnique": true,
+      "description": ""
+    }
+  ],
+  "dateFieldsTimeReference": {
+    "timeZone": "UTC",
+    "respectsDaylightSaving": false
+  },
+  "types": [],
+  "templates": [
+    {
+      "name": "Ausgrid_DTAPR_2023",
+      "description": "",
+      "prototype": {
+        "attributes": {
+          "dataset": null,
+          "object": null,
+          "name": null,
+          "voltage": null,
+          "dual_function": null,
+          "owner": null,
+          "extract_date": null
+        }
+      },
+      "drawingTool": "esriFeatureEditToolLine"
+    }
+  ],
+  "useStandardizedQueries": true,
+  "standardMaxRecordCount": 2000,
+  "tileMaxRecordCount": 2000,
+  "standardMaxRecordCountNoGeometry": 16000,
+  "maxRecordCountFactor": 1,
+  "supportedQueryFormats": "JSON, geoJSON, PBF",
+  "enableZDefaults": true,
+  "maxRecordCount": 2000,
+  "allowGeometryUpdates": true,
+  "capabilities": "Query",
+  "allowUpdateWithoutMValues": true,
+  "hasGeometryProperties": true,
+  "geometryProperties": {
+    "shapeLengthFieldName": "SHAPE__Length",
+    "units": "esriMeters"
+  },
+  "zDefault": 0,
+  "serviceItemId": "8610fffaef364c0fb7032af88d01ef17",
+  "hasMetadata": true,
+  "advancedEditingCapabilities": {
+    "supportedSqlFormatsInCalculate": [
+      "standard"
+    ]
+  },
+  "supportsApplyEditsWithGlobalIds": false,
+  "supportsAppend": true,
+  "supportedAppendFormats": "shapefile,geojson,csv,featureCollection",
+  "supportsQuantizationEditMode": true,
+  "supportsAttachmentsByUploadId": true,
+  "supportsAsyncDelete": true,
+  "supportsFieldDescriptionProperty": true,
+  "supportsExceedsLimitStatistics": true,
+  "sqlParserVersion": "PG_10.8.1"
+}

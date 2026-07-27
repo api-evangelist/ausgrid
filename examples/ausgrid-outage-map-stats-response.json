@@ -1,0 +1,17 @@
+{
+  "OutageNmiCount": 0,
+  "OutageNmiLastUpdated": "2026-07-28T08:08:45.4121131",
+  "OutageSubmissionLastSubmittedDate": "2026-07-28T08:08:45.4121131",
+  "OutageSubmissionLastSentDate": "2026-07-28T08:08:45.4121131",
+  "OutagePlannedTodayCount": 68,
+  "OutagePlannedTodayCustomers": 4231,
+  "OutagePlannedLastUpdated": "2026-07-28T08:08:45.4121131",
+  "OutageUnplannedRdoCount": 0,
+  "OutageUnplannedRdoCustomers": 0,
+  "OutageUnplannedPdoCount": 1,
+  "OutageUnplannedPdoCustomers": 5,
+  "OutageUnplannedLastUpdated": "2026-07-28T08:08:45.4121131",
+  "OutageUnplannedLastProcessed": "2026-07-28T08:08:45.4121131",
+  "TotalAusgridCustomer": 1816531,
+  "IsCached": false
+}

@@ -1,0 +1,135 @@
+generated: '2026-07-27'
+method: probed
+source: live HTTP probes of every Ausgrid-operated host found in apis.yml
+summary: |
+  Ausgrid publishes NO /.well-known/ discovery surface on any host it operates.
+  Every RFC 9116 (security.txt), OIDC discovery, RFC 8414 (oauth-authorization-server),
+  RFC 9728 (oauth-protected-resource), RFC 9727 (api-catalog) and ai-plugin probe
+  returned 404 or an error page. Only /robots.txt exists, and only on www.
+
+  FALSE-POSITIVE WARNING recorded so a later round does not re-chase it:
+  idoportal.ausgrid.com.au (ASP.NET) answers unknown paths with a 302 redirect to
+  /Errors/generic.html, which itself returns HTTP 200. A redirect-following probe
+  therefore reports "200" for /.well-known/openid-configuration,
+  /.well-known/oauth-authorization-server, /.well-known/oauth-protected-resource,
+  /.well-known/api-catalog and /api-docs on that host. All five were fetched and every
+  body is the same "Internal Server Error" HTML page — none is a discovery document.
+  Statuses below are the FIRST-HOP status, with the redirect target noted.
+hosts:
+- host: https://www.ausgrid.com.au
+  role: corporate website, open data pages, undocumented outage-map JSON routes
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/change-password
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /swagger.json
+    status: 404
+  - path: /api-docs
+    status: 404
+  - path: /robots.txt
+    status: 200
+- host: https://services.ausgrid.com.au
+  role: customer account sign-in wall (not a developer surface)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 500
+    note: server error, not a discovery document
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /swagger.json
+    status: 404
+  - path: /api-docs
+    status: 404
+  - path: /robots.txt
+    status: 404
+- host: https://idoportal.ausgrid.com.au
+  role: IDO connection-enquiry portal (ASP.NET); login wall, not a developer surface
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 302
+    redirect: /Errors/generic.html?aspxerrorpath=/.well-known/openid-configuration
+    note: body is the generic ASP.NET error page — NOT an OIDC discovery document
+  - path: /.well-known/oauth-authorization-server
+    status: 302
+    redirect: /Errors/generic.html
+    note: body is the generic ASP.NET error page
+  - path: /.well-known/oauth-protected-resource
+    status: 302
+    redirect: /Errors/generic.html
+    note: body is the generic ASP.NET error page
+  - path: /.well-known/api-catalog
+    status: 302
+    redirect: /Errors/generic.html
+    note: body is the generic ASP.NET error page
+  - path: /api-docs
+    status: 302
+    redirect: /Errors/generic.html
+    note: body is the generic ASP.NET error page — no Swagger UI, no spec
+  - path: /.well-known/security.txt
+    status: 500
+  - path: /llms.txt
+    status: 500
+  - path: /openapi.json
+    status: 500
+  - path: /swagger.json
+    status: 500
+  - path: /robots.txt
+    status: 500
+- host: https://dtapr.ausgrid.com.au
+  role: >-
+    Ausgrid Distribution and Transmission Annual Planning Report data portal
+    (Rosetta Analytics web application). Discovered this round; not probed in the
+    first round.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /swagger.json
+    status: 404
+  - path: /api-docs
+    status: 404
+  - path: /robots.txt
+    status: 404
+security_txt: false
+openid_configuration: false
+oauth_metadata: false
+api_catalog: false
+ai_plugin: false

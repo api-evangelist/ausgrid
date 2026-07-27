@@ -28,6 +28,27 @@ Ausgrid is the largest electricity distribution network service provider on Aust
 
 No documented public API. Ausgrid publishes no developer portal, no OpenAPI or other machine-readable contract, and no API reference. See [`review.yml`](review.yml) for every URL probed and the HTTP status returned.
 
+Ausgrid-owned network planning and unallocated hosting capacity data *is* queryable — as anonymous ArcGIS REST FeatureServer layers on the **NSW Government** portal (`portal.data.nsw.gov.au`), not on an Ausgrid host. Every feature carries `owner="Ausgrid"`, but the endpoint belongs to NSW Government, so it is catalogued here as Data and Reference, never as an Ausgrid API. Service and layer metadata is harvested verbatim into [`arcgis/`](arcgis/) and live responses into [`examples/`](examples/).
+
+## Artifacts
+
+| Directory | What is in it |
+| --- | --- |
+| [`arcgis/`](arcgis/) | Verbatim ArcGIS FeatureServer and layer metadata for `Ausgrid_DTAPR_2023` (8,696 feeder/line features) and `Ausgrid_UHC_Data` (2,160 primary + 2,120 secondary hosting-capacity records) |
+| [`examples/`](examples/) | Verbatim query responses, the ArcGIS error envelope, and one response from Ausgrid's own undocumented outage-map route |
+| [`well-known/`](well-known/) | Every `/.well-known/` probe on all four Ausgrid hosts — all miss; documents the idoportal redirect-to-error-page false positive |
+| [`security/`](security/) | Domain security probe (TLS/HSTS/CAA/SPF/DMARC) and the vulnerability disclosure program |
+| [`authentication/`](authentication/) | No credential exists anywhere; consumer meter data is gated by identity verification, not auth |
+| [`conventions/`](conventions/) | ArcGIS query, paging, format and error conventions; Ausgrid bulk-file conventions |
+| [`errors/`](errors/) | Observed error envelopes (ArcGIS returns HTTP 200 with an error body) |
+| [`lifecycle/`](lifecycle/) | Annual NER 5.13A publication cadence; no deprecation policy — the site restructure broke the catalogued links |
+| [`conformance/`](conformance/) | What standards do and do not apply, with the evidence for each |
+| [`data-model/`](data-model/) | Field-level model derived from the harvested layer schemas |
+| [`vocabulary/`](vocabulary/) | NMI, DNSP, zone substation, DTAPR, UHC, N-1, CDR, MSATS and friends |
+| [`packages/`](packages/) | No first-party SDK, no GitHub org; community tooling listed |
+| [`skills/`](skills/) | Two agent skills: hosting-capacity lookup, and getting the interval demand data |
+| [`llms/`](llms/) | Generated `llms.txt` (Ausgrid publishes none) |
+
 ## Mandate Posture
 
 | Field | Value |

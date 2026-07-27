@@ -1,0 +1,107 @@
+generated: '2026-07-27'
+method: derived
+source: |
+  Derived from the harvested ArcGIS service/layer metadata in arcgis/, live probes of
+  every Ausgrid host, the CDR Register energy data-holder endpoint, and Ausgrid's own
+  published data and planning pages. Absence of a standard is recorded as
+  conforms: false with the evidence that established it.
+standards:
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI or Swagger document exists. /openapi.json, /swagger.json and /api-docs
+    return 404 on www.ausgrid.com.au, services.ausgrid.com.au and dtapr.ausgrid.com.au;
+    on idoportal.ausgrid.com.au they 302 to a generic ASP.NET error page.
+- id: asyncapi
+  conforms: false
+  evidence: No event, streaming or webhook surface is published.
+- id: graphql
+  conforms: false
+  evidence: No /graphql endpoint on any Ausgrid host.
+- id: oauth2
+  conforms: false
+  evidence: No OAuth 2.0 anywhere; /.well-known/oauth-authorization-server 404 on every host.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 (www, services) or an error page (idoportal).
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: >-
+    /.well-known/security.txt -> HTTP 404 on all four hosts, despite a published
+    vulnerability disclosure program at
+    https://www.ausgrid.com.au/outages-and-issues/customer-support/ausgrid-vulnerability-disclosure-program
+- id: rfc9727-api-catalog
+  conforms: false
+  evidence: /.well-known/api-catalog returns 404 on every Ausgrid host.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    The only structured error surface (ArcGIS REST) returns a proprietary
+    {"error":{"code","message","details"}} envelope with HTTP 200, not
+    application/problem+json.
+- id: cdr-consumer-data-standards-energy
+  conforms: false
+  evidence: >-
+    Australia's Consumer Data Right energy regime designates electricity RETAILERS as
+    data holders with AEMO as gateway. GET
+    https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary (x-v: 1)
+    returned HTTP 200 with 84 brands and no Ausgrid entry. As a distributor Ausgrid is
+    not a designated data holder, so the CDR API standards do not bind it and it has
+    not adopted them voluntarily.
+- id: ner-5.13a-annual-planning-publication
+  conforms: true
+  evidence: >-
+    National Electricity Rules Rule 5.13A distribution annual planning obligation.
+    Ausgrid states it publishes 12 months of interval data in .csv within 30 business
+    days of publishing its Distribution and Transmission Annual Planning Report, for a
+    May-to-May reporting year, and the download tiles for financial years 2005 through
+    2025 exist and resolve today. This is a data PUBLICATION duty met with bulk files,
+    not an API conformance claim.
+- id: arcgis-rest-featureserver
+  conforms: true
+  scope: third-party-hosted
+  evidence: >-
+    Ausgrid-owned network planning and unallocated hosting capacity data is exposed as
+    ArcGIS REST FeatureServer 10.81 layers supporting Query, JSON/geoJSON/PBF output
+    and result-offset pagination — see arcgis/ausgrid-uhc-featureserver.json and
+    arcgis/ausgrid-dtapr-2023-featureserver.json. IMPORTANT: these endpoints are
+    operated by the NSW Government (portal.data.nsw.gov.au), not by Ausgrid; only the
+    data is Ausgrid's (every feature carries owner="Ausgrid").
+- id: geojson-rfc7946
+  conforms: true
+  scope: third-party-hosted
+  evidence: The same FeatureServer layers advertise supportedQueryFormats "JSON, geoJSON, PBF".
+- id: dcat-ckan
+  conforms: false
+  scope: third-party-hosted
+  evidence: >-
+    Three Ausgrid datasets are catalogued on the NSW Government CKAN portal
+    (https://data.nsw.gov.au/data/organization/ausgrid, cc-by), but Ausgrid does not
+    operate that catalogue and publishes no DCAT/CKAN endpoint of its own. All three
+    CKAN resource links still point at the retired /Industry/Our-Research/Data-to-share/
+    paths, which now 404 (re-verified 2026-07-27).
+- id: green-button-espi
+  conforms: false
+  evidence: No Green Button / ESPI reference anywhere on ausgrid.com.au.
+- id: ieee-2030.5-csip-aus
+  conforms: false
+  evidence: >-
+    No IEEE 2030.5 or CSIP-AUS reference. The dynamic connections page markets
+    "real-time signals" for large customers but names no protocol and points at an
+    email address.
+- id: iec-61968-61970-cim
+  conforms: false
+  evidence: No IEC Common Information Model reference found.
+- id: ocpp-ocpi
+  conforms: false
+  evidence: No EV charging protocol surface published.
+- id: openadr
+  conforms: false
+  evidence: No OpenADR demand-response interface published.
+compliance_program:
+  published: false
+  detail: >-
+    No trust centre, no SOC 2 / ISO 27001 / PCI DSS certification page, and no
+    published compliance posture for any technology surface. Ausgrid's compliance
+    publishing is economic-regulatory (AER determinations, DTAPR) rather than
+    information-security certification. No Compliance pointer is emitted.
