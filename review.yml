@@ -1,0 +1,338 @@
+aid: ausgrid
+name: Ausgrid
+review:
+  question: Does Ausgrid publish a documented public API, and does an energy data mandate
+    apply to it in a way it has actually implemented?
+  answer: false
+  date: '2026-07-27'
+  reviewer: API Evangelist
+  homeMarket: Australia
+  tier: network-distributor
+  summary: |
+    Ausgrid publishes no developer portal, no OpenAPI, and no documented API of any
+    kind. It does publish genuinely open network data as bulk file downloads, and it
+    answers consumer meter-data requests through a web form on a 10-to-20 business
+    day service level. Australia's Consumer Data Right is live in energy, but it does
+    not designate distributors, and Ausgrid does not appear in the public CDR Register.
+
+mandate:
+  regime: other
+  status: live-implemented
+  regimeVerbatim: |
+    The obligation that actually binds Ausgrid is a National Electricity Rules
+    publication duty, not a consumer data right. Ausgrid's own zone substation data
+    page states: "Each year, within 30 business days of the publication of our
+    Distribution and Transmission Annual Planning Report, Ausgrid will provide 12
+    months worth of interval data in .csv format. The Reporting Year (as defined in
+    Rule 5.13A) will be from May to May". Rule 5.13A of the National Electricity
+    Rules is the Distribution Annual Planning Report obligation.
+  howVerified: |
+    VERIFIED AS IMPLEMENTED, not merely claimed. Fetched
+    https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets/distribution-zone-substation-data
+    (HTTP 200, 2026-07-27) and confirmed the page renders a wall of real download
+    tiles — zipped CSV, one file per financial year, sizes rendered inline in the
+    markup (16.99MB, 18.82MB, 20.32MB, 34.04MB and so on), covering financial years
+    2005 through 2025 with the 2025 file marked updated 2025-12-09. Each ZIP contains
+    one CSV per zone substation with 15-minute interval demand in MW, for 180+ zone
+    substations. This is a mandate whose artifact exists and can be downloaded today.
+  consumerDataRightFinding: |
+    THIS IS THE CONTROL-CASE FINDING. The Consumer Data Right — the same statute,
+    the same regulator (ACCC) and the same Data Standards Body that produced
+    Australia's byte-for-byte identical banking APIs — was extended to energy and is
+    live. It does not reach Ausgrid.
+
+    The CDR (Energy Sector) Designation 2020 puts the obligation on electricity
+    RETAILERS as primary data holders and on AEMO as the secondary data holder and
+    gateway. Distributors / DNSPs supply data upstream into AEMO's MSATS, but they
+    are not designated data holders and do not answer accredited-data-recipient
+    requests.
+
+    Verified against the register itself, not against a press release:
+      GET https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+      (header x-v: 1) -> HTTP 200, 2026-07-27
+      84 energy data holder brands returned. Every one is a retailer or retail brand
+      (AGL, Origin Energy, EnergyAustralia, Red Energy, Amber, Powershop, Shell
+      Energy, Telstra Energy, Tesla Energy Ventures, ...). Substring "usgrid" does
+      not appear anywhere in the payload. Ausgrid is not a CDR energy data holder.
+    For contrast the banking summary endpoint
+      GET https://api.cdr.gov.au/cdr-register/v1/banking/data-holders/brands/summary
+      -> HTTP 200 was also fetched; also no Ausgrid, as expected.
+
+    Ausgrid's own consumer meter-data page never uses the words "Consumer Data
+    Right" or "CDR" at all.
+
+    So: a mandate proven in banking WAS transplanted into energy in the same
+    jurisdiction, and it deliberately routed around the poles-and-wires business
+    that physically owns the meter. The presence of a statutory data right in a
+    sector says nothing about whether any given organisation in that sector has an
+    obligation, let alone an implementation.
+
+dataStandard:
+  apiStandard: no standard reference found
+  detail: |
+    No Green Button / ESPI, no CDR Consumer Data Standards (energy) conformance, no
+    OCPP / OCPI, no OpenADR, no IEEE 2030.5 or CSIP-AUS, no IEC CIM 61968/61970
+    reference was found anywhere on ausgrid.com.au. The dynamic connections page
+    (https://www.ausgrid.com.au/connections/dynamic-connections, HTTP 200) markets
+    "real-time signals from Ausgrid" for large customers but names no protocol and
+    points at an email address (customernetworksolutions@ausgrid.com.au) instead of
+    a technical specification.
+    The only standard-shaped reference is a FORMAT convention, not an API standard:
+    consumer meter data is returned "in accordance with AEMO's meter data provision
+    procedures", with fees for non-standard formats. Published network data is plain
+    CSV inside ZIP.
+
+accessAndAuth:
+  accessGate: self-serve
+  gated: false
+  authModel: |
+    None on anything published. There is no API key, no OAuth2, no OpenID Connect
+    and no mTLS on any public surface.
+      https://www.ausgrid.com.au/.well-known/openid-configuration -> HTTP 404
+      https://www.ausgrid.com.au/.well-known/security.txt         -> HTTP 404
+    Bulk data downloads are anonymous HTTP GETs against Sitecore Content Hub.
+    Consumer meter data is gated by identity verification, not by a credential:
+    the requester must supply the NMI from the bill, the account holder's surname or
+    company name, the postcode, and a date range; a third party must additionally
+    attach a signed consent form from the account holder.
+    Two login walls exist for account and connection work and neither is a developer
+    surface: https://services.ausgrid.com.au/SignIn (HTTP 200) and
+    https://idoportal.ausgrid.com.au/ (HTTP 200, connection enquiries).
+  whatADeveloperMustDo: |
+    To get the open data: nothing. Open the research-data-sets page and click a
+    download tile. No account, no key, no agreement, no rate limit, no terms
+    acceptance click. The tiles resolve to opaque Sitecore Content Hub GUID URLs of
+    the form https://aopt-p-001.sitecorecontenthub.cloud/api/public/content/<guid>
+    with no filename and no version in the path.
+    To get the same three datasets as catalogued records: query the NSW Government
+    CKAN Action API anonymously — verified working:
+      GET https://data.nsw.gov.au/data/api/3/action/organization_show?id=ausgrid
+        -> HTTP 200, package_count 3
+      GET https://data.nsw.gov.au/data/api/3/action/package_search?fq=organization:ausgrid&rows=100
+        -> HTTP 200, count 3: past-outages, distribution-zone-substation,
+           electrcity-use — all licence cc-by, all datastore_active=false, all three
+           resources pointing at STALE ausgrid.com.au URLs under
+           /Industry/Our-Research/Data-to-share/... which now return HTTP 404 after a
+           site restructure to /about-us/about-ausgrid/research-data-sets/...
+      Note this CKAN API belongs to the NSW Government, not to Ausgrid. It is
+      recorded as a Data property, never as an Ausgrid API.
+    To get a customer's own interval data: fill in the meter data request form, pass
+    the NMI/name/postcode check, wait 10 business days for a single NMI or up to 20
+    for multiple, receive up to 2 years of history in AEST. There is no programmatic
+    path.
+
+dataSplit:
+  consumerDataApi: false
+  marketDataOpen: true
+  finding: |
+    The split is the story. Ausgrid is wide open on network/market data and entirely
+    closed on consumer data.
+    OPEN: 20 years of 15-minute zone substation interval demand (2005–2025, 180+
+    substations), average electricity use, and past outage data — free, anonymous,
+    bulk, no signup.
+    CLOSED: a customer's own meter data, which requires a form, an identity check, a
+    signed consent for third parties, and a 10–20 business day wait. No API exists,
+    and the CDR that would have forced one lands on the retailer instead.
+  licenceInconsistency: |
+    Worth flagging. data.nsw.gov.au records all three Ausgrid datasets as licence
+    cc-by. Ausgrid's own zone substation page asserts the opposite posture: "The data
+    contained in these files ... is the sole property of Ausgrid, and Ausgrid retains
+    all copyright and intellectual property in this data." An integrator reading the
+    catalogue and an integrator reading the source page get two different answers
+    about reuse rights.
+
+undocumentedMachineSurfaces:
+  note: |
+    Recorded as observation, NOT listed as an API in apis.yml. These are the internal
+    Next.js route handlers that power ausgrid.com.au itself. They are anonymously
+    reachable and return JSON, but they are undocumented, unversioned, carry no
+    published terms, and are not offered to developers. They were discovered by
+    reading the site's own shipped JavaScript bundles
+    (/_next/static/chunks/210-546e76ba089bb66a.js, 482-ab4747043b262b11.js,
+    997-e21f83ed31d644a8.js — all HTTP 200), not by guessing.
+  probed:
+    - url: https://www.ausgrid.com.au/api/healthz
+      status: 200
+      contentType: text/plain
+      body: Healthy
+    - url: https://www.ausgrid.com.au/api/outages-map/outages/stats
+      status: 200
+      contentType: application/json
+      note: >-
+        Returned live counters on 2026-07-27 including TotalAusgridCustomer 1816547,
+        OutagePlannedTodayCount 8, OutagePlannedTodayCustomers 508,
+        OutageUnplannedPdoCount 1, OutageUnplannedPdoCustomers 64.
+    - url: https://www.ausgrid.com.au/api/outages-map/network-area
+      status: 200
+      contentType: application/json
+      note: Returned the Ausgrid network service-area boundary as a lat/lng polygon array.
+  observedRouteNames:
+    - /api/outages-map/assets/for-bounds
+    - /api/outages-map/assets/for-id
+    - /api/outages-map/meters/for-bounds
+    - /api/outages-map/network-area
+    - /api/outages-map/outages/details-batch
+    - /api/outages-map/outages/stats
+    - /api/outages-map/places/autocomplete
+    - /api/outages-map/places/reverse-geocode
+    - /api/forms/cad-single-request
+    - /api/forms/cad-bulk-request
+    - /api/forms/cad-verify-request
+    - /api/forms/nmi-address-change
+    - /api/reporting/hazard-report
+    - /api/reporting/poles-report
+    - /api/reporting/streetlight-report
+    - /api/reporting/vegetation-report
+    - /api/reporting/vandalism-report
+    - /api/reporting/problem-with-power-supply
+    - /api/safety-clearance/check
+    - /api/search
+    - /api/search/taxonomies
+    - /api/subscribe
+    - /api/enquiry
+    - /api/healthz
+
+probes:
+  - url: https://www.ausgrid.com.au/
+    status: 200
+  - url: https://developer.ausgrid.com.au/
+    status: 000
+    note: DNS does not resolve / no connection.
+  - url: https://developers.ausgrid.com.au/
+    status: 000
+  - url: https://api.ausgrid.com.au/
+    status: 000
+  - url: https://data.ausgrid.com.au/
+    status: 000
+  - url: https://opendata.ausgrid.com.au/
+    status: 000
+  - url: https://docs.ausgrid.com.au/
+    status: 000
+  - url: https://www.ausgrid.com.au/developers
+    status: 404
+  - url: https://www.ausgrid.com.au/developer
+    status: 404
+  - url: https://www.ausgrid.com.au/api
+    status: 404
+  - url: https://www.ausgrid.com.au/docs
+    status: 404
+  - url: https://www.ausgrid.com.au/data
+    status: 404
+  - url: https://www.ausgrid.com.au/openapi.json
+    status: 404
+  - url: https://www.ausgrid.com.au/swagger.json
+    status: 404
+  - url: https://www.ausgrid.com.au/api-docs
+    status: 404
+  - url: https://www.ausgrid.com.au/.well-known/openid-configuration
+    status: 404
+  - url: https://www.ausgrid.com.au/.well-known/security.txt
+    status: 404
+  - url: https://www.ausgrid.com.au/robots.txt
+    status: 200
+  - url: https://www.ausgrid.com.au/sitemap.xml
+    status: 200
+    note: 530 <loc> entries; grepped for data/api/developer/research paths.
+  - url: https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets
+    status: 200
+  - url: https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets/distribution-zone-substation-data
+    status: 200
+  - url: https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets/average-electricity-use
+    status: 200
+  - url: https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets/electricity-research
+    status: 200
+  - url: https://www.ausgrid.com.au/your-energy-use/your-meter-and-supply/access-your-meter-data
+    status: 200
+  - url: https://www.ausgrid.com.au/your-energy-use/your-meter-and-supply/access-your-meter-data/meter-data-request-form
+    status: 200
+  - url: https://www.ausgrid.com.au/connections/dynamic-connections
+    status: 200
+  - url: https://www.ausgrid.com.au/industry-partners
+    status: 200
+  - url: https://www.ausgrid.com.au/outages
+    status: 200
+  - url: https://www.ausgrid.com.au/about-us/newsroom
+    status: 200
+  - url: https://www.ausgrid.com.au/outages-and-issues/customer-support/ausgrid-vulnerability-disclosure-program
+    status: 200
+  - url: https://services.ausgrid.com.au/SignIn
+    status: 200
+  - url: https://idoportal.ausgrid.com.au/
+    status: 200
+  - url: https://www.ausgrid.com.au/Industry/Our-Research/Data-to-share
+    status: 404
+    note: Old data-sharing path still cited by data.nsw.gov.au resources; now dead.
+  - url: https://www.ausgrid.com.au/Industry/Our-Research/Data-to-share/Solar-home-electricity-data
+    status: 404
+    note: >-
+      The well-known Ausgrid "Solar home electricity data" research dataset (300
+      gross-metered solar homes, 2010–2013) is no longer reachable at its long-cited
+      URL. Not recorded as a live artifact.
+  - url: https://data.nsw.gov.au/data/api/3/action/organization_show?id=ausgrid
+    status: 200
+  - url: https://data.nsw.gov.au/data/api/3/action/package_search?fq=organization:ausgrid&rows=100
+    status: 200
+  - url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+    status: 200
+  - url: https://api.cdr.gov.au/cdr-register/v1/banking/data-holders/brands/summary
+    status: 200
+  - url: https://api.github.com/orgs/ausgrid
+    status: 404
+    note: No Ausgrid GitHub organization.
+
+artifacts:
+  openapiHarvested: false
+  specsCount: 0
+  reason: |
+    Nothing to harvest. No OpenAPI, Swagger, Postman collection, AsyncAPI, GraphQL
+    schema, SDK or machine-readable contract of any kind is published by Ausgrid.
+    /openapi.json, /swagger.json and /api-docs all return 404, no developer subdomain
+    resolves, and the only JSON on the estate is undocumented internal site plumbing.
+    No openapi/ directory was created because creating one would have meant inventing
+    a spec.
+
+sources:
+  - url: https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets
+    type: Data
+    note: Current research data sets index. Replaces the dead /Industry/Our-Research/Data-to-share path.
+  - url: https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets/distribution-zone-substation-data
+    type: Data
+    note: >-
+      Zipped CSV per financial year 2005–2025, 15-minute interval demand in MW for
+      180+ zone substations. Cites NER Rule 5.13A. Asserts Ausgrid sole ownership of
+      the data.
+  - url: https://www.ausgrid.com.au/your-energy-use/your-meter-and-supply/access-your-meter-data
+    type: Documentation
+    note: >-
+      Consumer meter data process. Web form, NMI + surname/company + postcode
+      verification, signed consent for third parties, 10 business days single NMI /
+      20 business days multiple, up to 2 years history, AEMO meter data provision
+      procedures format. No mention of CDR.
+  - url: https://data.nsw.gov.au/data/organization/ausgrid
+    type: Data
+    note: 3 datasets, cc-by, on the NSW Government CKAN portal. Resource links are stale.
+  - url: https://api.cdr.gov.au/cdr-register/v1/energy/data-holders/brands/summary
+    type: Registry
+    note: 84 energy data holder brands, all retailers. Ausgrid absent.
+  - url: https://www.aemo.com.au/energy-systems/electricity/cdr-at-aemo
+    type: Documentation
+    note: >-
+      AEMO's CDR gateway role. Direct fetch of the /about-cdr child page returned
+      HTTP 403 to an anonymous client; the gateway/secondary-data-holder model is
+      recorded from AEMO's and cdr.gov.au's public descriptions rather than from a
+      page I retrieved in full.
+  - url: https://www.ausgrid.com.au/connections/dynamic-connections
+    type: Documentation
+    note: Dynamic Connection Agreement. Marketing only, no protocol named.
+
+actions:
+  apisYmlUpdated: true
+  apisListed: 0
+  developerPortal: ''
+  portalConfirmed: false
+  reason: |
+    apis[] is deliberately empty. Ausgrid documents no API, so listing one would be
+    fabrication. The open data is real and is recorded as Data properties in
+    common[]; the NSW CKAN Action API is recorded as a Data property because it is
+    the NSW Government's API, not Ausgrid's; the internal outage-map JSON routes are
+    recorded in this review as observed undocumented surfaces and nowhere else.
