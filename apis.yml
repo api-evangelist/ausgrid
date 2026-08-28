@@ -25,6 +25,17 @@ description: >-
   no developer portal, no OpenAPI, and no documented API of any kind; the only
   machine-readable surfaces found are the undocumented internal JSON routes behind
   its own outage map.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ausgrid.png
 tags:
 - Energy
