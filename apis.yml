@@ -1,5 +1,8 @@
 aid: ausgrid
 url: https://raw.githubusercontent.com/api-evangelist/ausgrid/refs/heads/main/apis.yml
+x-api-posture: no-product-api
+x-api-posture-basis: observed
+x-api-posture-note: "Ausgrid publishes no developer portal, no OpenAPI, and no documented API of any kind; the only machine-readable surfaces found are the undocumented internal JSON routes behind its own outage map."
 name: Ausgrid
 kind: company
 description: >-
