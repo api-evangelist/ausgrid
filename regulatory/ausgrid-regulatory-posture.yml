@@ -1,0 +1,72 @@
+generated: '2026-10-21'
+method: searched
+source: https://www.ausgrid.com.au/ausgrid-privacy-policy
+pages_read:
+- url: https://www.ausgrid.com.au/ausgrid-privacy-policy
+  http_status: 200
+- url: https://www.ausgrid.com.au/disclaimer
+  http_status: 200
+  note: Website terms of use / legal disclaimer. No catalog regulatory signal on this page.
+- url: https://www.ausgrid.com.au/outages-and-issues/customer-support/ausgrid-vulnerability-disclosure-program
+  http_status: 200
+  note: Vulnerability disclosure program (security module's concern). No catalog regulatory signal.
+frameworks_named: [Privacy Act (Australia), Australian Privacy Principles (APPs)]
+signals:
+  data_subject_request:
+    url: https://www.ausgrid.com.au/ausgrid-privacy-policy
+    section: 5. How can you access, and correct, the personal information we hold about you?
+    channel: privacy@ausgrid.com.au; 13 13 65
+    rights_named: [access, correction, complaint (escalation to OAIC)]
+    evidence:
+    - source: https://www.ausgrid.com.au/ausgrid-privacy-policy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "If you wish to access the personal information that we hold about you, please contact our Privacy Officer via email to privacy@ausgrid.com.au so we can explain how we will handle your access request."
+    - source: https://www.ausgrid.com.au/ausgrid-privacy-policy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "You also have the right to ask us to correct information about you which is inaccurate, incomplete, out of date, irrelevant or misleading."
+    - source: https://www.ausgrid.com.au/ausgrid-privacy-policy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "If your complaint is not resolved with us directly within 30 days of our receipt of the complaint or you are dissatisfied with the outcome of our investigation, then you may wish to take your privacy-related complaint to the Office of the Australian Information Commissioner ( OAIC )."
+    note: >-
+      Access and correction rights under the Australian Privacy Act, requested by email to the Privacy
+      Officer; complaints are answered generally within 30 days, then escalate to the OAIC. No erasure or
+      portability right is named.
+  data_retention:
+    url: https://www.ausgrid.com.au/ausgrid-privacy-policy
+    section: Retention and destruction of personal information
+    evidence:
+    - source: https://www.ausgrid.com.au/ausgrid-privacy-policy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "We take reasonable steps to destroy or de-identify personal information that we no longer need for a permitted purpose under privacy law, unless we are required or permitted by law or a court/tribunal order to retain the information."
+    note: >-
+      Purpose-limited retention (destroy or de-identify when no longer needed). No retention periods are stated.
+  data_residency:
+    url: https://www.ausgrid.com.au/ausgrid-privacy-policy
+    section: Do we disclose personal information to entities located overseas?
+    evidence:
+    - source: https://www.ausgrid.com.au/ausgrid-privacy-policy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "We take all reasonable steps to host personal information within Australia."
+    - source: https://www.ausgrid.com.au/ausgrid-privacy-policy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "However, we may disclose your personal information to overseas recipients, including to third party service providers or research organisations located outside of Australia, or engage third party data storage providers located offshore to store and secure our data, including our customer information, where permitted by laws, regulations or authorisations binding on us."
+    note: >-
+      Australia-first hosting is a best-effort commitment, not a guarantee: offshore storage providers and
+      overseas recipients are expressly allowed. No countries are named.
+  subprocessors:
+    url: https://www.ausgrid.com.au/ausgrid-privacy-policy
+    section: Outsourcing and advice
+    evidence:
+    - source: https://www.ausgrid.com.au/ausgrid-privacy-policy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: "We may disclose personal information to third parties to which we contract out specialised functions, including but not limited to mailing houses, printing companies, data storage companies, metering service providers, maintenance contractors, information technology providers, research companies, mercantile agents, consultants and legal and accounting services."
+    note: >-
+      Categories of processors only; no named subprocessor list is published. Contractors are required to
+      comply with the APPs.

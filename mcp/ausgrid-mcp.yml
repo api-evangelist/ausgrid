@@ -1,0 +1,25 @@
+generated: '2026-10-21'
+method: none
+status: none
+summary: >-
+  No official hosted or local Model Context Protocol (MCP) server was found for Ausgrid,
+  and no candidate tool list was derived because Ausgrid publishes no OpenAPI or other
+  API contract to derive one from. The only machine-readable Ausgrid data surfaces are
+  NSW Government-operated ArcGIS REST layers (portal.data.nsw.gov.au) and bulk CSV/ZIP
+  downloads; see skills/ and arcgis/ in this repo.
+checked:
+- url: https://www.ausgrid.com.au/.well-known/mcp.json
+  status: 404
+  date: '2026-10-21'
+- url: https://www.ausgrid.com.au/llms.txt
+  status: 404
+  date: '2026-10-21'
+- search: "Ausgrid MCP server model context protocol"
+  result: no Ausgrid-specific MCP server found
+  date: '2026-10-21'
+- preflight: contract_discovery verdict mcp=absent on www.ausgrid.com.au, data.nsw.gov.au, dtapr.ausgrid.com.au (2026-10-21)
+tools: []
+deployment:
+  mode: none
+  auth: unknown
+  verified: searched

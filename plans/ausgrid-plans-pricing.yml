@@ -1,0 +1,16 @@
+name: Ausgrid pricing
+generated: '2026-10-21'
+method: none
+source: https://www.ausgrid.com.au/about-us/corporate-governance/community-and-specialist-committees/pricing-working-group
+audience: unclear
+pricing_basis: none
+published: false
+delivery:
+  model: unclear
+plan_count: 0
+plans: []
+note: >-
+  Ausgrid operates no API, so there is no API or developer pricing. Its published
+  "pricing" pages concern regulated electricity network tariffs set under the AER
+  determination and billed through retailers; those are not API plans and are not
+  recorded here. Its open network datasets are free downloads with no tiers.

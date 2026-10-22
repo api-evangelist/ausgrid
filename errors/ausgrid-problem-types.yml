@@ -19,6 +19,7 @@ envelope:
 problems:
 - surface: arcgis-featureserver
   http_status: 200
+  status: 200
   body_code: 500
   message: Field name [nosuchfield] does not exist.
   meaning: The `where` clause or `outFields` referenced a field that is not on the layer.
@@ -30,6 +31,7 @@ problems:
   verified: '2026-07-27'
 - surface: arcgis-featureserver
   http_status: 200
+  status: 200
   body_code: 500
   message: null
   meaning: >-
@@ -42,6 +44,7 @@ problems:
   verified: '2026-07-27'
 - surface: ausgrid-website
   http_status: 404
+  status: 404
   message: Page not found
   meaning: >-
     Next.js HTML 404. Returned for every /.well-known/ path, /llms.txt, /openapi.json,
@@ -51,6 +54,7 @@ problems:
   verified: '2026-07-27'
 - surface: idoportal
   http_status: 302
+  status: 302
   redirect: /Errors/generic.html?aspxerrorpath=<requested-path>
   message: Internal Server Error
   meaning: >-

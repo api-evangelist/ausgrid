@@ -1,5 +1,6 @@
 ---
-name: Get Ausgrid zone substation interval demand data
+name: ausgrid-zone-substation-demand-data
+title: Get Ausgrid zone substation interval demand data
 description: >-
   Retrieve Ausgrid's open 15-minute interval demand history (2005-2025, 180+ zone
   substations) and the DTAPR network layers, and correctly explain why there is no API

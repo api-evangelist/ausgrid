@@ -1,0 +1,130 @@
+generated: '2026-10-21'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 9
+  own: 4
+  other_domain: 4
+  platform: 1
+  roles:
+  - api
+  - data
+  - identity
+  - other
+  - website
+hosts:
+- host: api.com.au
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: api.com.au
+  role: api
+  relation: other-domain
+- host: api.gov.au
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: api.gov.au
+  role: api
+  relation: other-domain
+- host: data.nsw.gov.au
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - Data
+  serves: []
+  registrable_domain: nsw.gov.au
+  role: data
+  relation: other-domain
+- host: dtapr.ausgrid.com.au
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - Data
+  serves: []
+  registrable_domain: ausgrid.com.au
+  role: other
+  relation: own
+- host: idoportal.ausgrid.com.au
+  found_by:
+  - pointer
+  - probed
+  - well-known
+  types:
+  - Portal
+  serves: []
+  registrable_domain: ausgrid.com.au
+  role: other
+  relation: own
+- host: portal.data.nsw.gov.au
+  found_by:
+  - pointer
+  - probed
+  - docs-index
+  - well-known
+  types:
+  - Data
+  serves:
+  - docs
+  registrable_domain: nsw.gov.au
+  role: data
+  relation: other-domain
+- host: services.ausgrid.com.au
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - Portal
+  - Login
+  serves: []
+  registrable_domain: ausgrid.com.au
+  role: identity
+  relation: own
+- host: www.ausgrid.com.au
+  found_by:
+  - pointer
+  - probed
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Pricing
+  - Website
+  - About
+  - Blog
+  - PrivacyPolicy
+  - TermsOfService
+  - Support
+  - Security
+  - Data
+  - Documentation
+  - Contact
+  - Outages
+  serves:
+  - docs
+  - hosting
+  vendor: vercel
+  registrable_domain: ausgrid.com.au
+  role: website
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform

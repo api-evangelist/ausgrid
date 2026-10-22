@@ -1,0 +1,10 @@
+name: Ausgrid rate limits
+generated: '2026-10-21'
+method: none
+source: https://www.ausgrid.com.au/your-energy-use/your-meter-and-supply/access-your-meter-data
+limit_count: 0
+limits: []
+note: >-
+  Ausgrid publishes no API and therefore documents no rate limits or rate-limit
+  headers. Customer meter data is provided via a web form answered in business days,
+  not via a callable endpoint.

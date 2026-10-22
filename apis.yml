@@ -1,10 +1,17 @@
 aid: ausgrid
+
 url: https://raw.githubusercontent.com/api-evangelist/ausgrid/refs/heads/main/apis.yml
+
 x-api-posture: no-product-api
+
 x-api-posture-basis: observed
+
 x-api-posture-note: "Ausgrid publishes no developer portal, no OpenAPI, and no documented API of any kind; the only machine-readable surfaces found are the undocumented internal JSON routes behind its own outage map."
+
 name: Ausgrid
+
 kind: company
+
 description: >-
   Ausgrid is the largest electricity distribution network service provider
   on Australia's east coast, operating the poles, wires, substations and underground
@@ -28,6 +35,7 @@ description: >-
   no developer portal, no OpenAPI, and no documented API of any kind; the only
   machine-readable surfaces found are the undocumented internal JSON routes behind
   its own outage map.
+
 deliveryModel:
   model: saas
   open_source: false
@@ -39,6 +47,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: unknown
   onboarding: open
@@ -52,7 +61,9 @@ accessModel:
   - security
   generated: '2026-09-02'
   method: derived
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ausgrid.png
+
+image: https://www.ausgrid.com.au/apple-touch-icon.png
+
 tags:
 - Energy
 - Australia
@@ -66,11 +77,26 @@ tags:
 - Solar
 - DER
 - Outages
+
 created: '2026-07-27'
-modified: '2026-07-27'
+
+modified: '2026-10-21'
+
 specificationVersion: '0.23'
-apis: []
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
 common:
+- type: Deprecation
+  url: lifecycle/ausgrid-lifecycle.yml
+- type: Hosts
+  url: hosts/ausgrid-hosts.yml
+- type: Vendors
+  url: vendors/ausgrid-vendors.yml
+- type: Pricing
+  url: https://www.ausgrid.com.au/about-us/corporate-governance/community-and-specialist-committees/pricing-working-group
 - type: DomainSecurity
   url: security/ausgrid-domain-security.yml
 - type: Website
@@ -91,8 +117,6 @@ common:
   url: security/ausgrid-vulnerability-disclosure.yml
 - type: WellKnown
   url: well-known/ausgrid-well-known.yml
-- type: Authentication
-  url: authentication/ausgrid-authentication.yml
 - type: Conventions
   url: conventions/ausgrid-conventions.yml
 - type: ErrorCatalog
@@ -107,12 +131,8 @@ common:
   url: data-model/ausgrid-data-model.yml
 - type: Examples
   url: examples/ausgrid-examples.yml
-- type: Packages
-  url: packages/ausgrid-packages.yml
 - type: AgentSkill
   url: skills/_index.yml
-- type: LLMsTxt
-  url: llms/ausgrid-llms.txt
 - type: Reference
   url: arcgis/ausgrid-dtapr-2023-featureserver.json
 - type: Reference
@@ -149,10 +169,37 @@ common:
   url: https://www.ausgrid.com.au/about-us/regulation-and-compliance/network-planning/dtapr
 - type: Portal
   url: https://services.ausgrid.com.au/SignIn
+- type: Login
+  url: https://services.ausgrid.com.au/SignIn
+- type: Contact
+  url: https://www.ausgrid.com.au/outages-and-issues/customer-support/contact-us
 - type: Portal
   url: https://idoportal.ausgrid.com.au/
 - type: Outages
   url: https://www.ausgrid.com.au/outages
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+
+apis: []
+
+x-coverage:
+  state: covered
+  reason: identity-verified
+  detail: Website www.ausgrid.com.au verified 200 (Next.js shell, rendered by preflight); all common[] pointers re-fetched 2026-10-21 and live (site 404 control returns 404, so 200s are real); dead S3 image (403) replaced with the provider's own apple-touch-icon.
+  evidence:
+  - url: https://www.ausgrid.com.au/
+    status: 200
+  - url: https://www.ausgrid.com.au/this-page-does-not-exist-xyz
+    status: 404
+  - url: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ausgrid.png
+    status: 403
+  - url: https://www.ausgrid.com.au/apple-touch-icon.png
+    status: 200
+  - url: https://services.ausgrid.com.au/SignIn
+    status: 200
+  - url: https://www.ausgrid.com.au/outages-and-issues/customer-support/contact-us
+    status: 200
+x-enrichment:
+  date: '2026-10-21'
+  status: enriched
+  artifacts_added: 8
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic

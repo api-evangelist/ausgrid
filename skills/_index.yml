@@ -1,3 +1,4 @@
+name: Ausgrid agent skills
 generated: '2026-07-27'
 method: generated
 note: >-
@@ -7,14 +8,16 @@ note: >-
   was fetched on 2026-07-27 and is saved in arcgis/ and examples/.
 skills:
 - file: ausgrid-hosting-capacity-lookup.md
-  name: Look up Ausgrid unallocated hosting capacity for a zone substation
+  name: ausgrid-hosting-capacity-lookup
+  title: Look up Ausgrid unallocated hosting capacity for a zone substation
   api: arcgis/ausgrid-uhc-featureserver.json
   surface: https://portal.data.nsw.gov.au/arcgis/rest/services/Hosted/Ausgrid_UHC_Data/FeatureServer
   operations:
   - GET /Ausgrid_UHC_Data/FeatureServer/0/query
   - GET /Ausgrid_UHC_Data/FeatureServer/1/query
 - file: ausgrid-zone-substation-demand-data.md
-  name: Get Ausgrid zone substation interval demand data
+  name: ausgrid-zone-substation-demand-data
+  title: Get Ausgrid zone substation interval demand data
   api: null
   surface: https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets
   operations: []

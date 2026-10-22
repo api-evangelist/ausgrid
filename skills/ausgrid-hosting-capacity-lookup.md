@@ -1,5 +1,6 @@
 ---
-name: Look up Ausgrid unallocated hosting capacity for a zone substation
+name: ausgrid-hosting-capacity-lookup
+title: Look up Ausgrid unallocated hosting capacity for a zone substation
 description: >-
   Find how much additional load or generation the Ausgrid network can absorb at a given
   zone substation and forecast year, by querying the Ausgrid unallocated hosting

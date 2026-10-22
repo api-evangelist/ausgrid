@@ -1,0 +1,20 @@
+generated: '2026-10-21'
+method: none
+source:
+- marketplace and registry probes 2026-10-21
+- https://zapier.com/apps/ausgrid/integrations
+- https://n8n.io/integrations/ausgrid/
+- https://composio.dev/toolkits/ausgrid
+- https://monid.ai/tools/ausgrid
+checked:
+- https://zapier.com/apps/ausgrid/integrations
+- https://www.make.com/en/integrations/ausgrid
+- https://n8n.io/integrations/ausgrid
+- https://composio.dev/toolkits/ausgrid
+- https://monid.ai/tools/ausgrid
+- https://n8n.io/integrations/ausgrid/
+summary: No integration edges found. Ausgrid operates no API or app, has no marketplace listing on Zapier or n8n
+  (404), and publishes no integrations/partners page.
+marketplace_apps: []
+edges: []
+templates: []

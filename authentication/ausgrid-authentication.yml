@@ -1,5 +1,5 @@
 generated: '2026-07-27'
-method: searched
+method: none
 source: |
   Live probes of every Ausgrid-operated host plus the ArcGIS REST endpoints that
   carry Ausgrid-owned network data; Ausgrid's own meter-data access page.
