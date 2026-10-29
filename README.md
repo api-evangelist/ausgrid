@@ -1,4 +1,4 @@
-# Ausgrid (ausgrid)
+# Ausgrid
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,84 +66,113 @@
 
 Ausgrid is the largest electricity distribution network service provider on Australia's east coast, operating the poles, wires, substations and underground cables that deliver power to more than 1.8 million customers across Sydney, the Central Coast and the Hunter Valley in New South Wales. It sits in the regulated middle of the value chain — between the National Electricity Market and the retailers who bill the customer — and it earns a regulated revenue rather than selling energy. Its API posture is honestly split and worth stating plainly. On the open side, Ausgrid publishes genuinely open network data: twenty years (2005–2025) of 15-minute interval demand readings for more than 180 zone substations as freely downloadable zipped CSV, plus average electricity use and past outage datasets catalogued on the NSW Government CKAN portal under CC-BY, none of which require a login, key or agreement. On the consumer side it is closed: a customer's own interval meter data is obtained through a web form that verifies NMI, account name and postcode and is answered in 10 to 20 business days, with a signed consent form required for any third party — there is no consumer API. Australia's Consumer Data Right was extended to energy and is live, but the designation lands on electricity retailers as primary data holders with AEMO as the gateway; Ausgrid is a distributor and does not appear among the 84 energy brands in the public CDR Register, so the mandate proven in banking routes around the business that physically holds the meter. Ausgrid publishes no developer portal, no OpenAPI, and no documented API of any kind; the only machine-readable surfaces found are the undocumented internal JSON routes behind its own outage map.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/ausgrid/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/ausgrid/refs/heads/main/apis.yml)
+**Areas:** Energy · Australia · Utilities · Electricity · Grid · Distribution Network · Open Data · Smart Metering · Consumer Data Right · Solar · DER · Outages
 
-## Tags
+## Ausgrid on APIs.io
 
-- Energy
-- Australia
-- Utilities
-- Electricity
-- Grid
-- Distribution Network
-- Open Data
-- Smart Metering
-- Consumer Data Right
-- Solar
-- DER
-- Outages
+Everything profiled for Ausgrid is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ausgrid/](https://apis.io/providers/ausgrid/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-07-27
-- **Modified:** 2026-07-27
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Vocabulary (1)
 
-No documented public API. Ausgrid publishes no developer portal, no OpenAPI or other machine-readable contract, and no API reference. See [`review.yml`](review.yml) for every URL probed and the HTTP status returned.
+The provider's domain terms, defined.
 
-Ausgrid-owned network planning and unallocated hosting capacity data *is* queryable — as anonymous ArcGIS REST FeatureServer layers on the **NSW Government** portal (`portal.data.nsw.gov.au`), not on an Ausgrid host. Every feature carries `owner="Ausgrid"`, but the endpoint belongs to NSW Government, so it is catalogued here as Data and Reference, never as an Ausgrid API. Service and layer metadata is harvested verbatim into [`arcgis/`](arcgis/) and live responses into [`examples/`](examples/).
+- [Ausgrid Vocabulary](https://apis.io/vocabularies/ausgrid/ausgrid-vocabulary/)
 
-## Artifacts
+#### Examples (4)
 
-| Directory | What is in it |
-| --- | --- |
-| [`arcgis/`](arcgis/) | Verbatim ArcGIS FeatureServer and layer metadata for `Ausgrid_DTAPR_2023` (8,696 feeder/line features) and `Ausgrid_UHC_Data` (2,160 primary + 2,120 secondary hosting-capacity records) |
-| [`examples/`](examples/) | Verbatim query responses, the ArcGIS error envelope, and one response from Ausgrid's own undocumented outage-map route |
-| [`well-known/`](well-known/) | Every `/.well-known/` probe on all four Ausgrid hosts — all miss; documents the idoportal redirect-to-error-page false positive |
-| [`security/`](security/) | Domain security probe (TLS/HSTS/CAA/SPF/DMARC) and the vulnerability disclosure program |
-| [`authentication/`](authentication/) | No credential exists anywhere; consumer meter data is gated by identity verification, not auth |
-| [`conventions/`](conventions/) | ArcGIS query, paging, format and error conventions; Ausgrid bulk-file conventions |
-| [`errors/`](errors/) | Observed error envelopes (ArcGIS returns HTTP 200 with an error body) |
-| [`lifecycle/`](lifecycle/) | Annual NER 5.13A publication cadence; no deprecation policy — the site restructure broke the catalogued links |
-| [`conformance/`](conformance/) | What standards do and do not apply, with the evidence for each |
-| [`data-model/`](data-model/) | Field-level model derived from the harvested layer schemas |
-| [`vocabulary/`](vocabulary/) | NMI, DNSP, zone substation, DTAPR, UHC, N-1, CDR, MSATS and friends |
-| [`packages/`](packages/) | No first-party SDK, no GitHub org; community tooling listed |
-| [`skills/`](skills/) | Two agent skills: hosting-capacity lookup, and getting the interval demand data |
-| [`llms/`](llms/) | Generated `llms.txt` (Ausgrid publishes none) |
+Example requests and responses.
 
-## Mandate Posture
+- [Ausgrid Arcgis Error Invalid Field Response](https://apis.io/examples/ausgrid/ausgrid-arcgis-error-invalid-field-response/)
+- [Ausgrid Dtapr Feeder Query Response](https://apis.io/examples/ausgrid/ausgrid-dtapr-feeder-query-response/)
+- [Ausgrid Outage Map Stats Response](https://apis.io/examples/ausgrid/ausgrid-outage-map-stats-response/)
+- [Ausgrid Uhc Primary Query Response](https://apis.io/examples/ausgrid/ausgrid-uhc-primary-query-response/)
 
-| Field | Value |
-| --- | --- |
-| Mandate regime | `other` — National Electricity Rules 5.13A annual planning data publication |
-| Mandate status | `live-implemented` — the mandated interval data files exist and download today |
-| Consumer Data Right (energy) | Live in Australia, **does not designate distributors**; Ausgrid is absent from the 84 energy brands in the public CDR Register |
-| Data standard | no standard reference found (consumer meter data supplied per AEMO meter data provision procedures, CSV) |
-| Consumer data API | No — web form, identity check, 10–20 business days |
-| Market/network data open | Yes — 2005–2025 zone substation interval demand, free and anonymous |
-| Access gate | `self-serve` for open data; identity-verified form for consumer data |
-| Auth model | None on anything published; no API key, OAuth2, OIDC or mTLS |
+#### Security (3)
 
-## Properties
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Ausgrid Authentication](https://apis.io/security/ausgrid/ausgrid-authentication/)
+- [Ausgrid Domain Security](https://apis.io/security/ausgrid/ausgrid-domain-security/)
+- [Ausgrid Vulnerability Disclosure](https://apis.io/security/ausgrid/ausgrid-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Ausgrid Plans Pricing](https://apis.io/plans/ausgrid/ausgrid-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Ausgrid Rate Limits](https://apis.io/rate-limits/ausgrid/ausgrid-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.ausgrid.com.au/)
-- [About](https://www.ausgrid.com.au/about-us)
+- [Documentation](https://www.ausgrid.com.au/your-energy-use/your-meter-and-supply/access-your-meter-data)
+- [Pricing](https://www.ausgrid.com.au/about-us/corporate-governance/community-and-specialist-committees/pricing-working-group)
+- [Support](https://www.ausgrid.com.au/outages-and-issues/customer-support)
 - [Blog](https://www.ausgrid.com.au/about-us/newsroom)
-- [Privacy](https://www.ausgrid.com.au/Ausgrid-Privacy-Policy)
-- [Vulnerability Disclosure](https://www.ausgrid.com.au/outages-and-issues/customer-support/ausgrid-vulnerability-disclosure-program)
-- [LinkedIn](https://www.linkedin.com/company/ausgrid/)
-- [Data — Research data sets](https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets)
-- [Data — Distribution zone substation data](https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets/distribution-zone-substation-data)
-- [Data — Average electricity use](https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets/average-electricity-use)
-- [Data — Electricity research](https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets/electricity-research)
-- [Data — Ausgrid on data.nsw.gov.au](https://data.nsw.gov.au/data/organization/ausgrid)
-- [Documentation — Access your meter data](https://www.ausgrid.com.au/your-energy-use/your-meter-and-supply/access-your-meter-data)
-- [Portal — Ausgrid Services sign in](https://services.ausgrid.com.au/SignIn)
-- [Portal — IDO connection enquiries](https://idoportal.ausgrid.com.au/)
-- [Outages](https://www.ausgrid.com.au/outages)
+- [Security](https://www.ausgrid.com.au/outages-and-issues/customer-support/ausgrid-vulnerability-disclosure-program)
+- [Terms of service](https://www.ausgrid.com.au/disclaimer)
+- [Privacy policy](https://www.ausgrid.com.au/ausgrid-privacy-policy)
 
-## Maintainers
+## API Evangelist rating
 
-- Kin Lane — kin@apievangelist.com
+**Kin Score 26.9** — thin · rubric 0.24.0 · scored 2026-10-21
+
+| Facet | Score |
+|---|---|
+| Discoverability | 48.2 |
+| Contract quality | 6.5 |
+| Contract governance | 8.3 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 35.1 |
+| Access clarity | 44.7 |
+
+**Agent readiness 8.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.5** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ausgrid/](https://apis.io/providers/ausgrid/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Ausgrid: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ausgrid/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
